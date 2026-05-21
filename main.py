@@ -1,3 +1,4 @@
+from tarfile import data_filter
 import tkinter as tk
 from tkinter import ttk,messagebox
 import csv
@@ -15,7 +16,7 @@ class BaseScreen:
             controller:Reference to FinfItApp for navigathion"""
         self.parent= parent
         self.controller = controller
-        self.frame = tk.Frame(Parent)
+        self.frame = tk.Frame(parent)
         self.build_ui()
 
 
@@ -63,6 +64,59 @@ class FindItApp:
         # Show requested screen
         if screen_name in self.screens:
             self.screens[screen_name].show()
+    def set_resource_input(self, resource_name, location):
+        """ Store resource input from InputScreen.
+        called by Kennedy's InputScreen when user submits.
+        Args:
+            resource_name: The resource user entered
+            location: Selected location (Lagos, Aba, Kano)"""
+        self.current_resource = {
+                    "name": resource_name,
+                    "location": location,
+                    "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+                }
+
+        def get_resource_result_results(self):
+            """ Get results for current resource.called by Udo's ResultsScreen to display results.
+              Returns:
+                    Dictionary with results or None"""
+
+            if self.currrent_resource and self.resource_engine:
+                # Dilibe's ResourceEngine will process this
+                results = self.resource_engine.find_resource(
+                    self.current_resource["name"],
+                    self.current_resource["location"]
+                )
+                self.search_results = results
+                return results
+                return None
+
+
+            def save_search_history(self):
+                """ Save current search to CSV. 
+                called after displaying results.
+                Uses Kene's DataManager."""
+
+                if self.current_resource and self.search_results and self.data_manager:
+                    self.data_manager.save_search(
+                         self.current_resource,
+                         self.search_results
+                    )
+
+
+            def load_search_history(self):
+                """ Load all previous searches.called by Tochi's DashboardScreen.
+
+                Returns:
+                    List of previous searches
+                    """
+
+                if self.data_manager:
+                    return self.data_manager.load_history()
+                    return []
+
+
                 
 
 
@@ -72,7 +126,34 @@ class FindItApp:
         each screen implements their own UI here."""
         raise
     NotImplementedError("subclass must implement build_ui()")
+
+
+
+
+class HomeScreen(BaseScreen):
+    """
+    Home/Welcome Screen
+    Developer: Ekenem (Product Design Lead)
+    """
     
+    def build_ui(self):
+        """
+        EKENEM: Implement your welcome screen here.
+        
+        Requirements:
+        - App title/logo
+        - Welcome message
+        - "Start" button that calls: self.controller.show_screen("input")
+        - Professional design matching Figma
+        
+        Example structure:
+        - Title label
+        - Subtitle/description
+        - Start button
+        - Maybe app logo/image
+        """
+
+        # PLACEHOLDER - Ekenem will implement
 
     def show(self):
         """Show this screen by packing its frame."""
@@ -81,3 +162,253 @@ class FindItApp:
     def hide(self):
         """Hide this screen by unpacking its frame."""
         self.frame.pack_forget()
+
+
+
+
+class InputScreen(BaseScreen):
+    """
+    Input Screen - Resource entry
+    Developer: Kennedy (Input Systems Engineer)
+    """
+    
+    def build_ui(self):
+        """
+        KENNEDY: Implement your input screen here.
+        
+        Requirements:
+        - Text input field for resource name
+        - Dropdown for location (Lagos, Aba, Kano)
+        - Submit button
+        - Input validation
+        - Back button to home
+        
+        When user submits:
+        1. Validate input (not empty)
+        2. Call: self.controller.set_resource_input(resource_name, location)
+        3. Navigate: self.controller.show_screen("results")
+        """
+        # PLACEHOLDER - Kennedy will implement
+        
+class ResultsScreen(BaseScreen):
+    """
+    Results Screen - Display resource information
+    Developer: Udo (Output & Presentation Engineer)
+    """
+    
+    def build_ui(self):
+        """
+        UDO: Implement your results screen here.
+        
+        Requirements:
+        - Display resource name
+        - Show possible uses (list)
+        - Show business ideas (list)
+        - Show income estimate
+        - Save to history button
+        - Back to input button
+        - View history button
+        
+        When screen shows:
+        1. Get results: results = self.controller.get_resource_results()
+        2. Display results in nice format
+        3. When user clicks save: self.controller.save_search_history()
+        """
+        # PLACEHOLDER - Udo will implement
+    def show(self):
+        """
+        Override show to refresh results when screen appears.
+        UDO: Call this to update display.
+        """
+        super().show()
+        # UDO: Add code here to refresh results display
+        # results = self.controller.get_resource_results()
+        # Update your labels/text widgets with results
+
+
+
+class DashboardScreen(BaseScreen):
+    """
+    Dashboard Screen - Search history
+    Developer: Tochi (Assistant Data & Persistence Engineer)
+    """
+    
+    def build_ui(self):
+        """
+        TOCHI: Implement your dashboard screen here.
+        
+        Requirements:
+        - Display all previous searches
+        - Show in table format (ttk.Treeview recommended)
+        - Columns: Date, Resource, Location, Business Ideas
+        - Back to home button
+        - Maybe: Click row to see full details
+        
+        When screen shows:
+        1. Get history: history = self.controller.load_search_history()
+        2. Display in table/list format
+        """
+        # PLACEHOLDER - Tochi will implement
+
+
+    def show(self):
+        """
+        Override show to refresh history when screen appears.
+        TOCHI: Call this to update table.
+        """
+        super().show()
+        # TOCHI: Add code here to refresh history display
+        # history = self.controller.load_search_history()
+        # Update your table/treeview with history
+
+
+
+
+class ResourceEngine:
+    """
+    Resource matching engine
+    Developer: Dilibe (Core Logic Engineer)
+    """
+    
+    def __init__(self, csv_file="resources.csv"):
+        """
+        DILIBE: Initialize your engine.
+        
+        Args:
+            csv_file: Path to resources CSV file
+        """
+        self.csv_file = csv_file
+        # DILIBE: Load CSV data here
+        # self.resources = self._load_resources()
+        print(f"ResourceEngine initialized (Dilibe: Load {csv_file} here)")
+    
+    def find_resource(self, resource_name, location):
+        """
+        DILIBE: Implement resource matching logic.
+        
+        Args:
+            resource_name: Name of resource to find
+            location: User's selected location
+        
+        Returns:
+            Dictionary with format:
+            {
+                "resource": "Sand",
+                "uses": ["Construction", "Glass making", "Landscaping"],
+                "business_ideas": [
+                    "Start sand supply business",
+                    "Partner with construction companies"
+                ],
+                "income_estimate": "₦50,000 - ₦200,000/month",
+                "location_specific": "High demand in Lagos construction"
+            }
+        """
+        # PLACEHOLDER - Dilibe will implement
+        # 1. Search CSV for resource_name
+        # 2. Filter by location if needed
+        # 3. Return formatted results
+        
+        print(f"ResourceEngine: Finding '{resource_name}' in {location}")
+        
+        return {
+            "resource": resource_name,
+            "uses": ["DILIBE: Add uses here", "Use 2", "Use 3"],
+            "business_ideas": [
+                "DILIBE: Add business idea 1",
+                "DILIBE: Add business idea 2"
+            ],
+            "income_estimate": "DILIBE: Add income estimate",
+            "location_specific": f"DILIBE: Add {location}-specific info"
+        }
+
+
+class DataManager:
+    """
+    Data persistence manager
+    Developer: Kene (Data & Persistence Engineer)
+    """
+    
+    def __init__(self, history_file="search_history.csv"):
+        """
+        KENE: Initialize data manager.
+        
+        Args:
+            history_file: Path to history CSV file
+        """
+        self.history_file = history_file
+        # KENE: Create file if doesn't exist
+        # self._initialize_file()
+        print(f"DataManager initialized (Kene: Setup {history_file} here)")
+    
+    def save_search(self, resource_input, results):
+        """
+        KENE: Save search to CSV.
+        
+        Args:
+            resource_input: Dict with name, location, timestamp
+            results: Dict with uses, business_ideas, income
+        """
+        # PLACEHOLDER - Kene will implement
+        # 1. Open CSV in append mode
+        # 2. Write new row with all data
+        # 3. Handle errors gracefully
+        
+        print(f"DataManager: Saving search for '{resource_input['name']}'")
+        print("KENE: Implement CSV writing here")
+    
+    def load_history(self):
+        """
+        KENE: Load all search history.
+        
+        Returns:
+            List of dictionaries, each representing a search
+            Format:
+            [
+                {
+                    "timestamp": "2024-01-15 10:30:00",
+                    "resource": "Sand",
+                    "location": "Lagos",
+                    "business_ideas": "...",
+                    "income": "..."
+                },
+                ...
+            ]
+        """
+        # PLACEHOLDER - Kene will implement
+        # 1. Open CSV file
+        # 2. Read all rows
+        # 3. Return as list of dictionaries
+        
+        print("DataManager: Loading history")
+        print("KENE: Implement CSV reading here")
+        
+        return [
+            {
+                "timestamp": "2024-01-15 10:30:00",
+                "resource": "Sand",
+                "location": "Lagos",
+                "business_ideas": "Construction supply",
+                "income": "₦50,000/month"
+            },
+            {
+                "timestamp": "2024-01-15 11:00:00",
+                "resource": "Cassava",
+                "location": "Aba",
+                "business_ideas": "Garri processing",
+                "income": "₦80,000/month"
+            }
+        ]
+
+
+
+def main():
+    """
+    Main entry point for the application.
+    Creates the window and starts the app.
+    """
+    root = tk.Tk()
+    app = FindItApp(root)
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
