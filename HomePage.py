@@ -1,12 +1,16 @@
 import tkinter as tk
 
 class HomeScreen: 
-    def __init__(self, root, controller):
-        self.root = root
+    def __init__(self, parent, controller):
+        self.parent = parent
         self.controller = controller
         
         # parent container
-        self.frame = tk.Frame(self.root)
+        self.frame = tk.Frame(parent)
+        self.build_ui()
+        
+        
+        
         
     def show(self):
         #to display screen frame
@@ -32,6 +36,7 @@ class HomeScreen:
         try:
             #logo made in figma and exported
             self.logo_img = tk.PhotoImage(file="logo.png")
+            self.logo_img = self.logo_img.subsample(6,6) #resizing logo
             
             logo_label = tk.Label(
                 self.frame, 
@@ -42,7 +47,7 @@ class HomeScreen:
             # incase theres any issue, but the file is already in this folder
             logo_label = tk.Label(
                 self.frame, 
-                text="🔍\n[ kindly make sure youve placed logo.png in your project folder ]", 
+                text="🔍\n[ make sure youve placed logo.png in your project folder ]", 
                 font=("Poppins", 14, "italic"), 
                 bg=bg_cream, 
                 fg=fg_dark,
@@ -52,14 +57,14 @@ class HomeScreen:
         logo_label.pack(pady=(60, 10))
         
         # title w brand name
-        title_text = tk.Label(
-            self.frame,
-            text="FIND IT",
-            font=("Poppins", 42, "bold"),
-            bg=bg_cream,
-            fg=fg_dark
-        )
-        title_text.pack()
+        #title_text = tk.Label(
+            #self.frame,
+            #text="FIND IT",
+            #font=("Poppins", 42, "bold"),
+           # bg=bg_cream,
+            #fg=fg_dark
+        #)
+        #title_text.pack()
 
         # catchy tagline
         headline_label = tk.Label(
@@ -72,7 +77,7 @@ class HomeScreen:
         )
         headline_label.pack(pady=(10, 15))
         
-        #straight line across page for decorarive purposes
+        #straight line across page for aesthetics
         line_across = tk.Frame(self.frame, bg=fg_dark, height=1, width=500)
         line_across.pack(pady=10)
         
