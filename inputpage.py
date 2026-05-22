@@ -8,7 +8,8 @@ class InputScreen(BaseScreen):
         self.title_section()
         self.main_section()
         self.footer_navigation()
-
+    
+    #--------------------------------
     def create_header(self):
 
         #This is the header frame
@@ -37,6 +38,7 @@ class InputScreen(BaseScreen):
         pady = 10
     )
 
+    #--------------------------------
     def title_section(self):
 
         #This is the title frame
@@ -78,6 +80,7 @@ class InputScreen(BaseScreen):
         pady = 20
     )
 
+    #----------------------------------
     def main_section(self):
         
        def main_section(self):
@@ -97,6 +100,7 @@ class InputScreen(BaseScreen):
         pady=20
     )
 
+        #---------------------------------
         #"Choose Input Method" Frame 
         self.main_title_frame = tk.Frame(
             self.main_section_frame,
@@ -126,6 +130,7 @@ class InputScreen(BaseScreen):
             pady = 10
         )
 
+       #---------------------------------------------------
        #Container holding Use Camera and Upload Image Cards
        self.cards_container = tk.Frame(
             self.main_section_frame,
@@ -176,7 +181,7 @@ class InputScreen(BaseScreen):
             self.camera_card,
             text = "Capture image using \n your webcam",
             bg = "#FDF5E0",
-            fd = "black",
+            fg = "black",
             font = ("Poppins", 10)
         )
 
@@ -204,23 +209,222 @@ class InputScreen(BaseScreen):
         self.upload_card.pack_propagate(False)
 
         #Upload title
+        self.upload_title = tk.Label(
+            self.upload_card,
+            text = "Upload Gallery",
+            bg = "#FDF5E0",
+            fg = "black",
+            font = ("Poppins", 14, "bold")
+        )
+
+        self.upload_title.pack(pady=(35, 5))
+
+        #Upload subtitle
+        self.upload_subtitle = tk.Label(
+            self.upload_card,
+            text = "Choose image from \n your device",
+            bg = "#FDF5E0",
+            fg = "black",
+            font = ("Poppins", 10)
+        )
+
+        self.upload_subtitle.pack()
+
+        #-----------------------------------------------------------
+        #The dividing line that separates image input and text input
+        self.divider_line = tk.Frame(
+            self.main_section_frame,
+            bg = "black",
+            height = 1
+        )
+
+        #Positioning the frame
+        self.divider_line.pack(
+            fill = "x",
+            padx = 20,
+            pady = 10
+        )
+
+        #----------------------------------
+        #"Or Enter Details..." Frame
+        self.details_section_frame = tk.Frame(
+            self.main_section_frame,
+            bg = "#FDF5E0"
+        )
+
+        #Positioning the Frame
+        self.details_section_frame.pack(
+            fill = "x",
+            padx = 20,
+            pady = 10
+        )
+
+        #"Or Enter Details..." Title
+        self.details_section_label = tk.Label(
+            self.details_section_frame,
+            text = "Or Enter Details (Optional)",
+            bg = "#FDF5E0",
+            fg = "#3B0D06",
+            font = ("Poppins", 17, "bold")
+        )
+
+         #Positioning the title inside the frame
+        self.details_section_label.pack(
+            side = "left"
+        )
+
+        #--------------------
+        #Resource Entry Field
+        self.resource_entry = tk.Entry(
+            self.details_section_frame,
+            bg="white",
+            fg="black",
+            font=("Poppins", 12),
+            relief="solid",
+            bd=1
+        )
+
+        #Placeholder text
+        self.resource_entry.insert(
+            0,
+            "Enter Resource (e.g. Cassava, Sand, Plastic Bottles, Palm Oil)"
+        )
+
+        #Positioning the entry field
+        self.resource_entry.pack(
+            fill="x",
+            padx=15,
+            pady=10,
+            ipady=8
+        )
+
+        #------------------------------
+        #Category and Location Dropdown
+        self.dropdown_section = tk.Frame(
+            self.main_section_frame,'
+            bg = "#FDF5E0"
+        )
+
+        #Positioning the container
+        self.dropdown_section.pack(
+            fill = "x",
+            padx = 20,
+            pady = 10
+        )
+
+        #CATEGORY ROW
+
+        self.category_row = tk.Frame(
+            self.dropdown_section,
+            bg="#FDF5E0"
+        )
+
+        #Positioning it in the frame
+        self.category_row.pack(
+            fill="x",
+            pady=5
+        )
+
+        # Category label
+        self.category_label = tk.Label(
+            self.category_row,
+            text="Category (Optional)",
+            bg="#FDF5E0",
+            fg="black",
+            font=("Poppins", 12)
+        )
+
+        self.category_label.pack(
+            side="left"
+        )
+
+        # Category dropdown
+        self.category_dropdown = tk.OptionMenu(
+            self.category_row,
+            tk.StringVar(),
+            "Agriculture",
+            "Mining",
+            "Recycling",
+            "Manufacturing",
+            #Other Categories could be added later
+        )
+
+        self.category_dropdown.pack(
+            side="right"
+        )
+
+        #LOCATION ROW
+
+        self.location_row = tk.Frame(
+            self.dropdown_section,
+            bg="#FDF5E0"
+        )
+
+        self.location_row.pack(
+            fill="x",
+            pady=5
+        )
+
+        #Location label
+        self.location_label = tk.Label(
+            self.location_row,
+            text="Your Location (Optional)",
+            bg="#FDF5E0",
+            fg="black",
+            font=("Poppins", 12)
+        )
+
+        self.location_label.pack(
+            side="left"
+        )
+
+        # Location dropdown
+        self.location_dropdown = tk.OptionMenu(
+            self.location_row,
+            tk.StringVar(),
+            "Lagos",
+            "Abuja",
+            "Port Harcourt",
+            "Kano",
+            #Other locations could be added later
+        )
+
+        self.location_dropdown.pack(
+                side="right"
+        )
+
+        #--------------------
+        #Analyze Resources Button
+
+        self.analyze_button_frame = tk.Frame(
+            self.main_section_frame,
+            bg="#FDF5E0"
+        )
         
+        # Positioning the frame
+        self.analyze_button_frame.pack(
+            fill="x",
+            padx=20,
+            pady=20
+        )
 
-        print("Or Enter Details(Optional)")
-        self.text_resource()
-        self.dropdown_section()
-        self.analyze_button()
+        # Analyze button
+        self.analyze_button = tk.Button(
+            self.analyze_button_frame,
+            text="ANALYZE RESOURCES",
+            bg="#5A1207",
+            fg="white",
+            font=("Poppins", 14, "bold"),
+            relief="flat",
+            bd=0,
+            cursor="hand2"
+        )
 
-    def camera_box(self):
-        print("Use Camera")
-        print("Capture image using your webcam")
-
-    def upload_image(self):
-        print("Upload Image")
-        print("Choose image from your main device")
-
-    def text_resource(self):
-        print("Enter Resource (e.g. Cassava, Sand, Plastic Bottles, Palm Oil)")
+        # Positioning the button
+        self.analyze_button.pack(
+            fill="x",
+            ipady=12
+        )
 
     def footer_navigation(self):
         self.home_nav()
