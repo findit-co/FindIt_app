@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk,messagebox
 import csv
 from datetime import datetime
+from HomePage import HomeScreen
 
 class BaseScreen:
     """
@@ -128,44 +129,6 @@ class FindItApp:
     NotImplementedError("subclass must implement build_ui()")
 
 
-
-
-class HomeScreen(BaseScreen):
-    """
-    Home/Welcome Screen
-    Developer: Ekenem (Product Design Lead)
-    """
-    
-    def build_ui(self):
-        """
-        EKENEM: Implement your welcome screen here.
-        
-        Requirements:
-        - App title/logo
-        - Welcome message
-        - "Start" button that calls: self.controller.show_screen("input")
-        - Professional design matching Figma
-        
-        Example structure:
-        - Title label
-        - Subtitle/description
-        - Start button
-        - Maybe app logo/image
-        """
-
-        # PLACEHOLDER - Ekenem will implement
-
-    def show(self):
-        """Show this screen by packing its frame."""
-        self.frame.pack(fill="both", expand=True)
-
-    def hide(self):
-        """Hide this screen by unpacking its frame."""
-        self.frame.pack_forget()
-
-
-
-
 class InputScreen(BaseScreen):
     """
     Input Screen - Resource entry
@@ -173,22 +136,16 @@ class InputScreen(BaseScreen):
     """
     
     def build_ui(self):
-        """
-        KENNEDY: Implement your input screen here.
-        
-        Requirements:
-        - Text input field for resource name
-        - Dropdown for location (Lagos, Aba, Kano)
-        - Submit button
-        - Input validation
-        - Back button to home
-        
-        When user submits:
-        1. Validate input (not empty)
-        2. Call: self.controller.set_resource_input(resource_name, location)
-        3. Navigate: self.controller.show_screen("results")
-        """
         # PLACEHOLDER - Kennedy will implement
+        pass
+    
+    def show(self):
+        """Show this screen"""
+        self.frame.pack(fill="both", expand=True)
+    
+    def hide(self):
+        """Hide this screen"""
+        self.frame.pack_forget()
         
 class ResultsScreen(BaseScreen):
     """
@@ -197,33 +154,16 @@ class ResultsScreen(BaseScreen):
     """
     
     def build_ui(self):
-        """
-        UDO: Implement your results screen here.
-        
-        Requirements:
-        - Display resource name
-        - Show possible uses (list)
-        - Show business ideas (list)
-        - Show income estimate
-        - Save to history button
-        - Back to input button
-        - View history button
-        
-        When screen shows:
-        1. Get results: results = self.controller.get_resource_results()
-        2. Display results in nice format
-        3. When user clicks save: self.controller.save_search_history()
-        """
         # PLACEHOLDER - Udo will implement
+        pass
+    
     def show(self):
-        """
-        Override show to refresh results when screen appears.
-        UDO: Call this to update display.
-        """
-        super().show()
-        # UDO: Add code here to refresh results display
-        # results = self.controller.get_resource_results()
-        # Update your labels/text widgets with results
+        """Show this screen"""
+        self.frame.pack(fill="both", expand=True)
+    
+    def hide(self):
+        """Hide this screen"""
+        self.frame.pack_forget()
 
 
 
@@ -234,32 +174,17 @@ class DashboardScreen(BaseScreen):
     """
     
     def build_ui(self):
-        """
-        TOCHI: Implement your dashboard screen here.
-        
-        Requirements:
-        - Display all previous searches
-        - Show in table format (ttk.Treeview recommended)
-        - Columns: Date, Resource, Location, Business Ideas
-        - Back to home button
-        - Maybe: Click row to see full details
-        
-        When screen shows:
-        1. Get history: history = self.controller.load_search_history()
-        2. Display in table/list format
-        """
         # PLACEHOLDER - Tochi will implement
-
-
+        pass
+    
     def show(self):
-        """
-        Override show to refresh history when screen appears.
-        TOCHI: Call this to update table.
-        """
-        super().show()
-        # TOCHI: Add code here to refresh history display
-        # history = self.controller.load_search_history()
-        # Update your table/treeview with history
+        """Show this screen"""
+        self.frame.pack(fill="both", expand=True)
+    
+    def hide(self):
+        """Hide this screen"""
+        self.frame.pack_forget()
+
 
 
 
