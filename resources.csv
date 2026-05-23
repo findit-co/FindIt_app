@@ -1,0 +1,63 @@
+resource,location,uses,business_idea,income_estimate
+cassava,Lagos,Food processing,Start a garri processing business,₦50,000 - ₦150,000/month
+cassava,Lagos,Starch production,Produce cassava flour for bakeries,₦50,000 - ₦150,000/month
+cassava,Lagos,Garri processing,Supply to food manufacturers,₦50,000 - ₦150,000/month
+cassava,Lagos,Flour manufacturing,Export processed cassava,₦50,000 - ₦150,000/month
+cassava,Lagos,Bioethanol production,Start cassava chip business,₦50,000 - ₦150,000/month
+cassava,Lagos,Animal feed,Wholesale cassava distribution,₦50,000 - ₦150,000/month
+cassava,Aba,Food processing,Industrial starch production,₦80,000 - ₦180,000/month
+cassava,Aba,Starch production,Garri packaging business,₦80,000 - ₦180,000/month
+cassava,Aba,Garri processing,Wholesale distribution,₦80,000 - ₦180,000/month
+cassava,Aba,Flour manufacturing,Supply to food processors,₦80,000 - ₦180,000/month
+cassava,Kano,Food processing,Animal feed production,₦40,000 - ₦80,000/month
+cassava,Kano,Animal feed,Cassava chip manufacturing,₦40,000 - ₦80,000/month
+cassava,Kano,Cassava chips,Local market supply,₦40,000 - ₦80,000/month
+cassava,Kano,Dried flakes,Wholesale distribution,₦40,000 - ₦80,000/month
+plastic,Lagos,Recycling,Recycle into chairs and tiles,₦50,000 - ₦100,000/month
+plastic,Lagos,Packaging,Sell to recycling plants,₦50,000 - ₦100,000/month
+plastic,Lagos,Construction materials,Manufacture plastic pipes,₦50,000 - ₦100,000/month
+plastic,Lagos,Container manufacturing,Collect and sort for resale,₦50,000 - ₦100,000/month
+plastic,Lagos,Furniture production,Start plastic recycling business,₦50,000 - ₦100,000/month
+plastic,Aba,Recycling,Shred and sell to manufacturers,₦30,000 - ₦60,000/month
+plastic,Aba,Packaging,Make plastic dustbins,₦30,000 - ₦60,000/month
+plastic,Aba,Container manufacturing,Produce plastic hangers,₦30,000 - ₦60,000/month
+plastic,Aba,Household items,Local recycling business,₦30,000 - ₦60,000/month
+plastic,Kano,Recycling,Collect and sell to recycling depot,₦20,000 - ₦40,000/month
+plastic,Kano,Packaging,Make plastic roofing sheets,₦20,000 - ₦40,000/month
+plastic,Kano,Water sachet collection,Waste collection service,₦20,000 - ₦40,000/month
+sand,Lagos,Construction,Supply to construction sites,₦150,000 - ₦300,000/month
+sand,Lagos,Land filling,Block molding business,₦150,000 - ₦300,000/month
+sand,Lagos,Concrete production,Sand mining operation,₦150,000 - ₦300,000/month
+sand,Lagos,Glass manufacturing,Building material supply,₦150,000 - ₦300,000/month
+sand,Lagos,Block molding,Sand delivery service,₦150,000 - ₦300,000/month
+sand,Aba,Construction,Building material supply,₦80,000 - ₦150,000/month
+sand,Aba,Building,Block making business,₦80,000 - ₦150,000/month
+sand,Aba,Plastering,Construction sand delivery,₦80,000 - ₦150,000/month
+sand,Aba,Concrete production,Sand wholesale,₦80,000 - ₦150,000/month
+sand,Kano,Construction,Sand supply for housing,₦50,000 - ₦100,000/month
+sand,Kano,Mud brick production,Land development,₦50,000 - ₦100,000/month
+sand,Kano,Land filling,Traditional building materials,₦50,000 - ₦100,000/month
+sand,Kano,Building,Sand delivery service,₦50,000 - ₦100,000/month
+palm oil,Lagos,Cooking oil production,Palm oil processing and packaging,₦100,000 - ₦200,000/month
+palm oil,Lagos,Cosmetics manufacturing,Wholesale supply to markets,₦100,000 - ₦200,000/month
+palm oil,Lagos,Biofuel production,Export business,₦100,000 - ₦200,000/month
+palm oil,Lagos,Soap making,Soap manufacturing,₦100,000 - ₦200,000/month
+palm oil,Lagos,Hair products,Local distribution,₦100,000 - ₦200,000/month
+palm oil,Aba,Cooking oil production,Palm oil processing,₦120,000 - ₦220,000/month
+palm oil,Aba,Soap making,Soap manufacturing,₦120,000 - ₦220,000/month
+palm oil,Aba,Cosmetics,Local distribution network,₦120,000 - ₦220,000/month
+palm oil,Aba,Traditional medicine,Wholesale supply,₦120,000 - ₦220,000/month
+palm oil,Kano,Cooking oil production,Wholesale distribution,₦60,000 - ₦120,000/month
+palm oil,Kano,Soap making,Soap making business,₦60,000 - ₦120,000/month
+palm oil,Kano,Food industry,Retail supply,₦60,000 - ₦120,000/month
+scrap metal,Lagos,Recycling,Sell to scrap yards,₦100,000 - ₦200,000/month
+scrap metal,Lagos,Manufacturing,Metal recycling business,₦100,000 - ₦200,000/month
+scrap metal,Lagos,Construction,Make gates and grills,₦100,000 - ₦200,000/month
+scrap metal,Lagos,Welding,Welding services,₦100,000 - ₦200,000/month
+scrap metal,Lagos,Metal fabrication,Scrap collection service,₦100,000 - ₦200,000/month
+scrap metal,Aba,Recycling,Scrap collection business,₦70,000 - ₦150,000/month
+scrap metal,Aba,Manufacturing,Metal supply to manufacturers,₦70,000 - ₦150,000/month
+scrap metal,Aba,Metal fabrication,Recycling depot,₦70,000 - ₦150,000/month
+scrap metal,Kano,Recycling,Scrap metal trading,₦40,000 - ₦80,000/month
+scrap metal,Kano,Metal fabrication,Collection service,₦40,000 - ₦80,000/month
+scrap metal,Kano,Building materials,Supply to foundries,₦40,000 - ₦80,000/month
