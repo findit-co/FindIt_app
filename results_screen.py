@@ -218,10 +218,7 @@ class ResultsScreen:
         grid_frame.grid_columnconfigure(0, weight=1)
         grid_frame.grid_columnconfigure(1, weight=1)
 
-        # =====================================================
         # INDUSTRIAL USES CARD
-        # =====================================================
-
         uses_card = tk.Frame(
             grid_frame,
             bg="#F8F1DD",
@@ -263,10 +260,7 @@ class ResultsScreen:
             pady=(0, 14)
         )
 
-        # =====================================================
         # CREATIVE USES CARD
-        # =====================================================
-
         creative_card = tk.Frame(
             grid_frame,
             bg="#F8F1DD",
@@ -308,10 +302,7 @@ class ResultsScreen:
             pady=(0, 14)
         )
 
-        # =====================================================
         # BUSINESS IDEAS CARD
-        # =====================================================
-
         business_card = tk.Frame(
             grid_frame,
             bg="#F8F1DD",
@@ -352,10 +343,7 @@ class ResultsScreen:
             pady=(0, 14)
         )
 
-        # =====================================================
         # LOCAL RELEVANCE CARD
-        # =====================================================
-
         local_card = tk.Frame(
             grid_frame,
             bg="#F8F1DD",
@@ -396,10 +384,7 @@ class ResultsScreen:
             pady=(0, 14)
         )
 
-        # =====================================================
         # BUTTON SECTION
-        # =====================================================
-
         button_frame = tk.Frame(
             self.main_card,
             bg="#F8F1DD"
@@ -446,10 +431,7 @@ class ResultsScreen:
             ipady=8
         )
 
-        # =====================================================
         # FOOTER NAVIGATION
-        # =====================================================
-
         nav_frame = tk.Frame(
             self.frame,
             bg="white",
@@ -474,7 +456,6 @@ class ResultsScreen:
         ]
 
         for text, screen in nav_items:
-
             btn = tk.Button(
                 nav_inner,
                 text=text,
@@ -485,27 +466,16 @@ class ResultsScreen:
                 cursor="hand2",
                 justify="center",
                 activebackground="white",
-                command=lambda s=screen:
-                self.controller.show_screen(s)
+                command=lambda s=screen: self.controller.show_screen(s)
             )
-
-            btn.pack(
-                side="left",
-                padx=28,
-                pady=4
-            )
+            btn.pack(side="left", padx=28, pady=4)
 
     # =========================================================
     # SHOW
     # =========================================================
 
     def show(self):
-
-        self.frame.pack(
-            fill="both",
-            expand=True
-        )
-
+        self.frame.pack(fill="both", expand=True)
         self.refresh()
 
     # =========================================================
@@ -513,7 +483,6 @@ class ResultsScreen:
     # =========================================================
 
     def hide(self):
-
         self.frame.pack_forget()
 
     # =========================================================
@@ -521,30 +490,19 @@ class ResultsScreen:
     # =========================================================
 
     def refresh(self):
-
-        if self.controller.current_resource and \
-                self.controller.resource_engine:
-
+        if self.controller.current_resource and self.controller.resource_engine:
             resource = self.controller.current_resource.get("name", "Unknown")
             location = self.controller.current_resource.get("location", "Lagos")
 
-            # Get results from engine
-            result = self.controller.resource_engine.find_resource(
-                resource,
-                location
-            )
+            result = self.controller.resource_engine.find_resource(resource, location)
+
+            # STORE THE RESULTS FOR SAVING - THIS WAS THE PROBLEM
+            self.current_results = result
 
             if result and "error" not in result:
+                self.resource_label.config(text=result.get("resource", resource).title())
+                self.income_label.config(text=result.get("income_estimate", "₦0 - ₦0"))
 
-                self.resource_label.config(
-                    text=result.get("resource", resource).title()
-                )
-
-                self.income_label.config(
-                    text=result.get("income_estimate", "₦0 - ₦0")
-                )
-
-                # Industrial Uses
                 uses = result.get("uses", [])
                 if isinstance(uses, list):
                     uses_text = "\n\n".join([f"• {u}" for u in uses])
@@ -552,7 +510,6 @@ class ResultsScreen:
                     uses_text = f"• {uses}"
                 self.uses_label.config(text=uses_text)
 
-                # Business Ideas
                 business = result.get("business_ideas", [])
                 if isinstance(business, list):
                     business_text = "\n\n".join([f"• {b}" for b in business])
@@ -560,67 +517,44 @@ class ResultsScreen:
                     business_text = f"• {business}"
                 self.business_label.config(text=business_text)
 
-                # Local Relevance
-                self.local_label.config(
-                    text=result.get("location_specific", "Information not available")
-                )
+                self.local_label.config(text=result.get("location_specific", "Information not available"))
 
-                # Creative uses (if available, otherwise use a subset of uses)
-                if "creative" in result:
-                    creative = result.get("creative", [])
-                    if isinstance(creative, list):
-                        creative_text = "\n\n".join([f"• {c}" for c in creative])
-                    else:
-                        creative_text = f"• {creative}"
+                if isinstance(uses, list) and len(uses) >= 2:
+                    creative_text = "\n\n".join([f"• {uses[0]}", f"• {uses[1]}"])
                 else:
-                    # If no creative field, show first 2 uses as creative
-                    if isinstance(uses, list) and len(uses) >= 2:
-                        creative_text = "\n\n".join([f"• {uses[0]}", f"• {uses[1]}"])
-                    else:
-                        creative_text = "• Information available in Industrial Uses"
-                
+                    creative_text = "• Information available in Industrial Uses"
                 self.creative_label.config(text=creative_text)
 
-                # Store for saving
-                self.current_results = result
-
             else:
-                # Handle not found
                 self.resource_label.config(text=resource.title())
                 self.income_label.config(text="Data not available")
                 self.uses_label.config(text="• Information not found\n• Try another resource")
                 self.creative_label.config(text="• No creative uses found")
                 self.business_label.config(text="• No business ideas available")
                 self.local_label.config(text="No local relevance data available")
-                self.current_results = None
-
         else:
-            # No resource data
             self.resource_label.config(text="No Resource Selected")
             self.income_label.config(text="--")
             self.uses_label.config(text="• Please search for a resource first")
             self.creative_label.config(text="• Go to Input Screen")
             self.business_label.config(text="• Enter a resource name")
             self.local_label.config(text="Then click ANALYZE RESOURCES")
+            self.current_results = None
 
     # =========================================================
     # SAVE SEARCH
     # =========================================================
 
     def save_search(self):
-
+        print(f"DEBUG: current_results = {self.current_results}")
+        print(f"DEBUG: current_resource = {self.controller.current_resource}")
+        
         if self.controller.current_resource and self.current_results:
-            
-            # Save using controller's data manager
             success = self.controller.save_search_history()
-            
             if success:
-                messagebox.showinfo(
-                    "Success",
-                    "Search saved to history! ✅"
-                )
+                messagebox.showinfo("Success", "Search saved to history! ✅")
             else:
-                # Fallback: manual save
+                # Manual save as fallback
                 try:
                     file_exists = os.path.isfile("search_history.csv")
                     with open("search_history.csv", "a", newline="", encoding="utf-8") as f:
@@ -628,15 +562,16 @@ class ResultsScreen:
                         if not file_exists:
                             writer.writerow(["timestamp", "resource", "location", "business_idea", "income"])
                         
-                        business_text = self.current_results.get("business_ideas", "")
-                        if isinstance(business_text, list):
-                            business_text = business_text[0] if business_text else ""
+                        # Extract business idea
+                        business = self.current_results.get("business_ideas", "")
+                        if isinstance(business, list):
+                            business = business[0] if business else ""
                         
                         writer.writerow([
                             self.controller.current_resource.get("timestamp", ""),
                             self.controller.current_resource.get("name", ""),
                             self.controller.current_resource.get("location", ""),
-                            business_text,
+                            business,
                             self.current_results.get("income_estimate", "")
                         ])
                     messagebox.showinfo("Success", "Search saved to history! ✅")
@@ -644,7 +579,6 @@ class ResultsScreen:
                     messagebox.showerror("Error", f"Could not save: {e}")
         else:
             messagebox.showwarning(
-                "Nothing to Save",
-                "No search results to save. Please search for a resource first."
+                "Nothing to Save", 
+                f"No search results to save.\n\nCurrent Results: {self.current_results is not None}\nCurrent Resource: {self.controller.current_resource is not None}"
             )
-            
