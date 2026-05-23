@@ -10,6 +10,8 @@ class InputScreen(BaseScreen):
         self.footer_navigation()
     
     #--------------------------------
+    #HEADER SECTION
+
     def create_header(self):
 
         #This is the header frame
@@ -39,6 +41,8 @@ class InputScreen(BaseScreen):
     )
 
     #--------------------------------
+    #TITLE SECTION
+
     def title_section(self):
 
         #This is the title frame
@@ -81,24 +85,24 @@ class InputScreen(BaseScreen):
     )
 
     #----------------------------------
+    #MAIN SECTION
+
     def main_section(self):
-        
-       def main_section(self):
 
-    # This is the main section frame
-    self.main_section_frame = tk.Frame(
-        self,
-        bg= "#FDF5E0",
-        bd = 1,
-        relief = "solid"
-    )
+        # This is the main section frame
+        self.main_section_frame = tk.Frame(
+            self,
+            bg= "#FDF5E0",
+            bd = 1,
+            relief = "spy inputpage.pyolid"
+        )
 
-    # Positioning the frame
-    self.main_section_frame.pack(
-        fill="both",
-        padx=40,
-        pady=20
-    )
+        # Positioning the frame
+        self.main_section_frame.pack(
+            fill="both",
+            padx=40,
+            pady=20
+        )
 
         #---------------------------------
         #"Choose Input Method" Frame 
@@ -130,25 +134,25 @@ class InputScreen(BaseScreen):
             pady = 10
         )
 
-       #---------------------------------------------------
-       #Container holding Use Camera and Upload Image Cards
-       self.cards_container = tk.Frame(
+        #---------------------------------------------------
+        #Container holding Use Camera and Upload Image Cards
+        self.cards_container = tk.Frame(
             self.main_section_frame,
             bg = "#FDF5E0"
-       )
+        )
 
-       #Positioning the container
-       self.cards_container.pack(
-        fill = "x",
-        padx = 20,
-        pady = 10
-       )
+        #Positioning the container
+        self.cards_container.pack(
+            fill = "x",
+            padx = 20,
+            pady = 10
+        )
 
        #CAMERA CARD FRAME
 
-       self.camera_card = tk.Frame(
+        self.camera_card = tk.Frame(
             self.cards_container,
-            bg = ""#FDF5E0"",
+            bg = "#FDF5E0",
             bd = 1,
             relief = "solid",
             width = 300,
@@ -169,7 +173,7 @@ class InputScreen(BaseScreen):
         self.camera_title = tk.Label(
             self.camera_card,
             text = "Use Camera",
-            bg = #FDF5E0",
+            bg = "#FDF5E0",
             fg = "black",
             font = ("Poppins", 14, "bold")
         )
@@ -301,7 +305,7 @@ class InputScreen(BaseScreen):
         #------------------------------
         #Category and Location Dropdown
         self.dropdown_section = tk.Frame(
-            self.main_section_frame,'
+            self.main_section_frame,
             bg = "#FDF5E0"
         )
 
@@ -426,11 +430,174 @@ class InputScreen(BaseScreen):
             ipady=12
         )
 
-    def footer_navigation(self):
-        self.home_nav()
-        self.input_nav()
-        self.results_nav()
-        self.dashboard_nav()
+    # -----------------------------------
+    #FOOTER NAVIGATION SECTION
+
+    self.footer_frame = tk.Frame(
+        self,
+        bg="white",
+        height=80
+    )
+
+    #Positioning the footer
+    self.footer_frame.pack(
+        fill="x",
+        side="bottom"
+    )
+
+    #Prevent footer from shrinking
+    self.footer_frame.pack_propagate(False)
+
+    #Home Navigation Item
+    self.home_nav = tk.Frame(
+        self.footer_frame,
+        bg="white"
+    )
+
+    #Positioning it
+    self.home_nav.pack(
+        side="left",
+        expand=True,
+        pady=10
+    )
+
+    #Home icon placeholder
+    self.home_icon = tk.Label(
+        self.home_nav,
+        text="🏠",
+        bg="white",
+        font=("Arial", 20)
+    )
+
+    #Positioning it
+    self.home_icon.pack()
+
+    #Home text
+    self.home_text = tk.Label(
+        self.home_nav,
+        text="Home",
+        bg="white",
+        fg="black",
+        font=("Poppins", 10)
+    )
+
+    #Positioning it
+    self.home_text.pack()
+
+    #Input Navigation Item
+    self.input_nav = tk.Frame(
+        self.footer_frame,
+        bg="white"
+    )
+
+    #Positioning it
+    self.input_nav.pack(
+        side="left",
+        expand=True,
+        pady=10
+    )
+
+    #Input icon placeholder
+    self.input_icon = tk.Label(
+        self.input_nav,
+        text="📷",
+        bg="white",
+        font=("Arial", 20)
+    )
+
+    #Positioning it
+    self.input_icon.pack()
+
+    #Input text
+    self.input_text = tk.Label(
+        self.input_nav,
+        text="Input",
+        bg="white",
+        fg="black",
+        font=("Poppins", 10)
+    )
+
+    #Positioning it
+    self.input_text.pack()
+
+    #Results Navigation Item
+
+    self.results_nav = tk.Frame(
+        self.footer_frame,
+        bg="white"
+    )
+
+    #Positioning it
+    self.results_nav.pack(
+        side="left",
+        expand=True,
+        pady=10
+    )
+
+    #Results icon placeholder
+    self.results_icon = tk.Label(
+        self.results_nav,
+        text="📄",
+        bg="white",
+        font=("Arial", 20)
+    )
+
+    #Positioning it
+    self.results_icon.pack()
+
+    #Results text
+    self.results_text = tk.Label(
+        self.results_nav,
+        text="Results",
+        bg="white",
+        fg="black",
+        font=("Poppins", 10)
+    )
+
+    #Positioning it
+    self.results_text.pack()
+
+    #Dashboard Navigation Item
+
+    self.dashboard_nav = tk.Frame(
+        self.footer_frame,
+        bg="white"
+    )
+
+    self.dashboard_nav.pack(
+        side="left",
+        expand=True,
+        pady=10
+    )
+
+    #Dashboard icon placeholder
+    self.dashboard_icon = tk.Label(
+        self.dashboard_nav,
+        text="📊",
+        bg="white",
+        font=("Arial", 20)
+    )
+
+    #Positioning it
+    self.dashboard_icon.pack()
+
+    # Dashboard text
+    self.dashboard_text = tk.Label(
+        self.dashboard_nav,
+        text="Dashboard",
+        bg="white",
+        fg="black",
+        font=("Poppins", 10)
+    )
+
+    #Positioning it
+    self.dashboard_text.pack()
+
+
+
+
+
+
 
     
 
