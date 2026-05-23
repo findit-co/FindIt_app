@@ -1,101 +1,63 @@
-resource,uses,business_ideas,income_estimate,location,location_specific
-Crude Oil,"Fuel, plastics, chemicals","Mini refinery, lubricant production","$50,000/month",Rivers State,Close to oil fields and export terminals
-Natural Gas,"Power generation, cooking gas",LPG bottling plant,"$35,000/month",Delta State,Large gas reserves and pipeline access
-Limestone,Cement production,Cement block factory,"$12,000/month",Kogi State,Abundant limestone deposits
-Coal,Energy and industrial heating,Coal briquette business,"$8,000/month",Enugu State,Historic coal mining region
-Gold,Jewelry and investment,Gold processing business,"$25,000/month",Zamfara State,Presence of gold deposits
-Tin,Alloy production,Metal fabrication,"$9,000/month",Plateau State,Known tin mining area
-Iron Ore,Steel manufacturing,Steel rod production,"$20,000/month",Kogi State,Large iron ore reserves
-Bitumen,Road construction,Asphalt production,"$18,000/month",Ondo State,Nigeria’s largest bitumen deposits
-Cocoa,Chocolate and beverages,Chocolate factory,"$15,000/month",Ondo State,High cocoa production
-Rubber,Tyres and gloves,Rubber processing plant,"$10,000/month",Edo State,Large rubber plantations
-Palm Oil,Cooking and cosmetics,Soap making,"$14,000/month",Akwa Ibom,Abundant oil palm trees
-Cassava,Garri and flour,Cassava flour mill,"$7,000/month",Benue State,Large cassava farming region
-Rice,Food production,Rice milling,"$11,000/month",Kebbi State,Major rice-producing area
-Maize,Animal feed and food,Feed mill,"$6,000/month",Kaduna State,High maize cultivation
-Ginger,Spices and medicine,Ginger export business,"$9,500/month",Kaduna State,Major ginger farming region
-Sesame Seeds,Oil and snacks,Sesame oil production,"$8,500/month",Nasarawa State,High sesame output
-Groundnut,Oil and snacks,Peanut butter production,"$5,500/month",Kano State,Large groundnut farms
-Cotton,Textile manufacturing,Textile factory,"$13,000/month",Katsina State,Strong cotton farming
-Shea Butter,Cosmetics and skincare,Shea butter packaging,"$6,500/month",Niger State,Abundant shea trees
-Kaolin,Ceramics and paint,Ceramic production,"$7,200/month",Ogun State,Rich kaolin deposits
-Tomatoes,Export,Packaging company,"$11,560/month",Kaduna State,Abundant raw material supply
-Plantain,Manufacturing,Retail distribution,"$43,919/month",Oyo State,Large local demand
-Sorghum,Export,Supply chain company,"$33,266/month",Lagos State,Abundant raw material supply
-Millet,Export,Processing factory,"$40,919/month",Ondo State,Close to farms and suppliers
-Manganese,Food processing,Export business,"$12,292/month",Ogun State,Access to ports for export
-Timber,Food processing,Supply chain company,"$34,010/month",Lagos State,Easy transportation access
-Millet,Manufacturing,Retail distribution,"$7,511/month",Rivers State,Easy transportation access
-Plantain,Textiles,Packaging company,"$16,840/month",Kano State,Easy transportation access
-Zinc,Textiles,Retail distribution,"$23,426/month",Benue State,Easy transportation access
-Tomatoes,Export,Packaging company,"$31,492/month",Oyo State,Close to farms and suppliers
-Tea,Energy production,Export business,"$45,298/month",Kaduna State,Access to ports for export
-Banana,Cosmetics,Packaging company,"$28,452/month",Ogun State,Large local demand
-Phosphate,Food processing,Export business,"$37,234/month",Enugu State,Large local demand
-Phosphate,Textiles,Supply chain company,"$33,164/month",Ogun State,Access to ports for export
-Manganese,Construction,Retail distribution,"$18,894/month",Lagos State,Easy transportation access
-Plantain,Energy production,Export business,"$38,390/month",Rivers State,Access to ports for export
-Fish,Manufacturing,Export business,"$26,232/month",Benue State,Large local demand
-Manganese,Export,Packaging company,"$37,327/month",Ondo State,Availability of skilled labor
-Granite,Energy production,Export business,"$16,223/month",Kaduna State,Easy transportation access
-Tea,Manufacturing,Manufacturing plant,"$36,491/month",Benue State,Availability of skilled labor
-Yam,Export,Export business,"$46,228/month",Kaduna State,Close to farms and suppliers
-Manganese,Export,Retail distribution,"$38,194/month",Lagos State,Easy transportation access
-Phosphate,Export,Retail distribution,"$11,297/month",Kano State,Close to farms and suppliers
-Timber,Packaging,Processing factory,"$24,645/month",Kano State,Abundant raw material supply
-Copper,Cosmetics,Supply chain company,"$7,455/month",Lagos State,Access to ports for export
-Banana,Packaging,Export business,"$33,285/month",Rivers State,Easy transportation access
-Timber,Manufacturing,Export business,"$29,873/month",Delta State,Close to farms and suppliers
-Fish,Energy production,Manufacturing plant,"$32,564/month",Rivers State,Access to ports for export
-Salt,Packaging,Retail distribution,"$6,127/month",Lagos State,Availability of skilled labor
-Lead,Construction,Retail distribution,"$40,060/month",Kano State,Access to ports for export
-Phosphate,Textiles,Export business,"$22,647/month",Delta State,Availability of skilled labor
-Plantain,Food processing,Retail distribution,"$15,610/month",Oyo State,Easy transportation access
-Banana,Energy production,Manufacturing plant,"$12,867/month",Oyo State,Access to ports for export
-Millet,Export,Retail distribution,"$20,197/month",Lagos State,Large local demand
-Timber,Manufacturing,Export business,"$25,608/month",Ondo State,Abundant raw material supply
-Yam,Export,Export business,"$39,431/month",Delta State,Access to ports for export
-Tomatoes,Construction,Retail distribution,"$22,932/month",Benue State,Large local demand
-Timber,Cosmetics,Retail distribution,"$24,872/month",Delta State,Easy transportation access
-Millet,Food processing,Packaging company,"$48,713/month",Ogun State,Availability of skilled labor
-Coffee,Cosmetics,Supply chain company,"$21,546/month",Enugu State,Large local demand
-Millet,Food processing,Packaging company,"$32,822/month",Ogun State,Easy transportation access
-Tomatoes,Construction,Manufacturing plant,"$42,727/month",Kaduna State,Access to ports for export
-Tomatoes,Cosmetics,Manufacturing plant,"$46,226/month",Kano State,Large local demand
-Copper,Manufacturing,Supply chain company,"$27,494/month",Enugu State,Close to farms and suppliers
-Cashew,Textiles,Manufacturing plant,"$10,244/month",Lagos State,Abundant raw material supply
-Cashew,Cosmetics,Processing factory,"$17,362/month",Ondo State,Large local demand
-Tomatoes,Energy production,Packaging company,"$39,016/month",Oyo State,Abundant raw material supply
-Manganese,Construction,Processing factory,"$48,523/month",Ogun State,Availability of skilled labor
-Manganese,Textiles,Manufacturing plant,"$27,248/month",Ondo State,Easy transportation access
-Salt,Manufacturing,Export business,"$40,830/month",Lagos State,Easy transportation access
-Granite,Export,Manufacturing plant,"$29,554/month",Kaduna State,Access to ports for export
-Lead,Energy production,Processing factory,"$27,488/month",Ogun State,Availability of skilled labor
-Pepper,Packaging,Export business,"$37,810/month",Delta State,Availability of skilled labor
-Salt,Manufacturing,Manufacturing plant,"$40,468/month",Benue State,Easy transportation access
-Manganese,Packaging,Packaging company,"$25,282/month",Ogun State,Easy transportation access
-Tomatoes,Packaging,Packaging company,"$46,333/month",Ondo State,Close to farms and suppliers
-Timber,Energy production,Packaging company,"$4,404/month",Ondo State,Access to ports for export
-Fish,Food processing,Packaging company,"$34,559/month",Oyo State,Easy transportation access
-Fish,Construction,Retail distribution,"$47,103/month",Ondo State,Easy transportation access
-Clay,Manufacturing,Supply chain company,"$39,624/month",Enugu State,Abundant raw material supply
-Clay,Export,Manufacturing plant,"$36,503/month",Delta State,Close to farms and suppliers
-Zinc,Cosmetics,Processing factory,"$35,412/month",Rivers State,Abundant raw material supply
-Coffee,Cosmetics,Packaging company,"$33,680/month",Ondo State,Abundant raw material supply
-Sorghum,Manufacturing,Supply chain company,"$45,172/month",Lagos State,Close to farms and suppliers
-Salt,Textiles,Retail distribution,"$28,651/month",Oyo State,Easy transportation access
-Salt,Construction,Packaging company,"$4,685/month",Benue State,Easy transportation access
-Timber,Food processing,Export business,"$47,733/month",Kano State,Availability of skilled labor
-Pepper,Cosmetics,Retail distribution,"$17,320/month",Kaduna State,Close to farms and suppliers
-Cashew,Energy production,Packaging company,"$22,860/month",Rivers State,Easy transportation access
-Copper,Energy production,Export business,"$38,670/month",Kano State,Availability of skilled labor
-Lead,Construction,Manufacturing plant,"$36,420/month",Oyo State,Availability of skilled labor
-Yam,Manufacturing,Export business,"$10,345/month",Enugu State,Abundant raw material supply
-Copper,Export,Export business,"$22,203/month",Kano State,Availability of skilled labor
-Manganese,Export,Processing factory,"$32,341/month",Kano State,Easy transportation access
-Tea,Packaging,Packaging company,"$20,079/month",Delta State,Large local demand
-Timber,Food processing,Supply chain company,"$7,290/month",Rivers State,Easy transportation access
-Manganese,Manufacturing,Manufacturing plant,"$13,002/month",Enugu State,Large local demand
-Timber,Food processing,Export business,"$40,316/month",Delta State,Close to farms and suppliers
-Granite,Textiles,Manufacturing plant,"$40,110/month",Oyo State,Access to ports for export
-Yam,Food processing,Supply chain company,"$41,142/month",Delta State,Availability of skilled labor
+resource,location,uses,business_idea,income_estimate
+cassava,Lagos,Food processing,Start a garri processing business,₦50,000 - ₦150,000/month
+cassava,Lagos,Starch production,Produce cassava flour for bakeries,₦50,000 - ₦150,000/month
+cassava,Lagos,Garri processing,Supply to food manufacturers,₦50,000 - ₦150,000/month
+cassava,Lagos,Flour manufacturing,Export processed cassava,₦50,000 - ₦150,000/month
+cassava,Lagos,Bioethanol production,Start cassava chip business,₦50,000 - ₦150,000/month
+cassava,Lagos,Animal feed,Wholesale cassava distribution,₦50,000 - ₦150,000/month
+cassava,Aba,Food processing,Industrial starch production,₦80,000 - ₦180,000/month
+cassava,Aba,Starch production,Garri packaging business,₦80,000 - ₦180,000/month
+cassava,Aba,Garri processing,Wholesale distribution,₦80,000 - ₦180,000/month
+cassava,Aba,Flour manufacturing,Supply to food processors,₦80,000 - ₦180,000/month
+cassava,Kano,Food processing,Animal feed production,₦40,000 - ₦80,000/month
+cassava,Kano,Animal feed,Cassava chip manufacturing,₦40,000 - ₦80,000/month
+cassava,Kano,Cassava chips,Local market supply,₦40,000 - ₦80,000/month
+cassava,Kano,Dried flakes,Wholesale distribution,₦40,000 - ₦80,000/month
+plastic,Lagos,Recycling,Recycle into chairs and tiles,₦50,000 - ₦100,000/month
+plastic,Lagos,Packaging,Sell to recycling plants,₦50,000 - ₦100,000/month
+plastic,Lagos,Construction materials,Manufacture plastic pipes,₦50,000 - ₦100,000/month
+plastic,Lagos,Container manufacturing,Collect and sort for resale,₦50,000 - ₦100,000/month
+plastic,Lagos,Furniture production,Start plastic recycling business,₦50,000 - ₦100,000/month
+plastic,Aba,Recycling,Shred and sell to manufacturers,₦30,000 - ₦60,000/month
+plastic,Aba,Packaging,Make plastic dustbins,₦30,000 - ₦60,000/month
+plastic,Aba,Container manufacturing,Produce plastic hangers,₦30,000 - ₦60,000/month
+plastic,Aba,Household items,Local recycling business,₦30,000 - ₦60,000/month
+plastic,Kano,Recycling,Collect and sell to recycling depot,₦20,000 - ₦40,000/month
+plastic,Kano,Packaging,Make plastic roofing sheets,₦20,000 - ₦40,000/month
+plastic,Kano,Water sachet collection,Waste collection service,₦20,000 - ₦40,000/month
+sand,Lagos,Construction,Supply to construction sites,₦150,000 - ₦300,000/month
+sand,Lagos,Land filling,Block molding business,₦150,000 - ₦300,000/month
+sand,Lagos,Concrete production,Sand mining operation,₦150,000 - ₦300,000/month
+sand,Lagos,Glass manufacturing,Building material supply,₦150,000 - ₦300,000/month
+sand,Lagos,Block molding,Sand delivery service,₦150,000 - ₦300,000/month
+sand,Aba,Construction,Building material supply,₦80,000 - ₦150,000/month
+sand,Aba,Building,Block making business,₦80,000 - ₦150,000/month
+sand,Aba,Plastering,Construction sand delivery,₦80,000 - ₦150,000/month
+sand,Aba,Concrete production,Sand wholesale,₦80,000 - ₦150,000/month
+sand,Kano,Construction,Sand supply for housing,₦50,000 - ₦100,000/month
+sand,Kano,Mud brick production,Land development,₦50,000 - ₦100,000/month
+sand,Kano,Land filling,Traditional building materials,₦50,000 - ₦100,000/month
+sand,Kano,Building,Sand delivery service,₦50,000 - ₦100,000/month
+palm oil,Lagos,Cooking oil production,Palm oil processing and packaging,₦100,000 - ₦200,000/month
+palm oil,Lagos,Cosmetics manufacturing,Wholesale supply to markets,₦100,000 - ₦200,000/month
+palm oil,Lagos,Biofuel production,Export business,₦100,000 - ₦200,000/month
+palm oil,Lagos,Soap making,Soap manufacturing,₦100,000 - ₦200,000/month
+palm oil,Lagos,Hair products,Local distribution,₦100,000 - ₦200,000/month
+palm oil,Aba,Cooking oil production,Palm oil processing,₦120,000 - ₦220,000/month
+palm oil,Aba,Soap making,Soap manufacturing,₦120,000 - ₦220,000/month
+palm oil,Aba,Cosmetics,Local distribution network,₦120,000 - ₦220,000/month
+palm oil,Aba,Traditional medicine,Wholesale supply,₦120,000 - ₦220,000/month
+palm oil,Kano,Cooking oil production,Wholesale distribution,₦60,000 - ₦120,000/month
+palm oil,Kano,Soap making,Soap making business,₦60,000 - ₦120,000/month
+palm oil,Kano,Food industry,Retail supply,₦60,000 - ₦120,000/month
+scrap metal,Lagos,Recycling,Sell to scrap yards,₦100,000 - ₦200,000/month
+scrap metal,Lagos,Manufacturing,Metal recycling business,₦100,000 - ₦200,000/month
+scrap metal,Lagos,Construction,Make gates and grills,₦100,000 - ₦200,000/month
+scrap metal,Lagos,Welding,Welding services,₦100,000 - ₦200,000/month
+scrap metal,Lagos,Metal fabrication,Scrap collection service,₦100,000 - ₦200,000/month
+scrap metal,Aba,Recycling,Scrap collection business,₦70,000 - ₦150,000/month
+scrap metal,Aba,Manufacturing,Metal supply to manufacturers,₦70,000 - ₦150,000/month
+scrap metal,Aba,Metal fabrication,Recycling depot,₦70,000 - ₦150,000/month
+scrap metal,Kano,Recycling,Scrap metal trading,₦40,000 - ₦80,000/month
+scrap metal,Kano,Metal fabrication,Collection service,₦40,000 - ₦80,000/month
+scrap metal,Kano,Building materials,Supply to foundries,₦40,000 - ₦80,000/month
