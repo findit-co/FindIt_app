@@ -156,7 +156,7 @@ class InputScreen:
         divider = tk.Frame(inner_frame, bg="#CCCCCC", height=1)
         divider.pack(fill="x", pady=10)
         
-        # ========== OR ENTER DETAILS ==========
+        # ========== OR ENTER DETAILS SECTION ==========
         details_label = tk.Label(
             inner_frame,
             text="Or Enter Details (Optional)",
@@ -164,9 +164,9 @@ class InputScreen:
             fg="#3B0D06",
             font=("Poppins", 14, "bold")
         )
-        details_label.pack(anchor="w", pady=(8, 10))
+        details_label.pack(anchor="w", pady=(8, 12))
         
-        # Resource Entry Field
+        # ========== RESOURCE NAME (Label above - KEPT AS IS) ==========
         resource_label = tk.Label(
             inner_frame,
             text="Resource Name:",
@@ -191,55 +191,55 @@ class InputScreen:
         self.resource_entry.bind("<FocusIn>", self.clear_placeholder)
         self.resource_entry.bind("<FocusOut>", self.restore_placeholder)
         
-        # Category and Location row (side by side)
-        row_frame = tk.Frame(inner_frame, bg="white")
-        row_frame.pack(fill="x", pady=(0, 15))
-        
-        # Category (left side)
-        category_frame = tk.Frame(row_frame, bg="white")
-        category_frame.pack(side="left", fill="x", expand=True, padx=(0, 12))
+        # ========== CATEGORY (Label left, field right) ==========
+        category_row = tk.Frame(inner_frame, bg="white")
+        category_row.pack(fill="x", pady=5)
         
         category_label = tk.Label(
-            category_frame,
-            text="Category (Optional)",
+            category_row,
+            text="Category (Optional):",
             bg="white",
             fg="#333333",
-            font=("Poppins", 11)
+            font=("Poppins", 11),
+            width=18,
+            anchor="w"
         )
-        category_label.pack(anchor="w", pady=(0, 3))
+        category_label.pack(side="left", padx=(0, 10))
         
         self.category_var = tk.StringVar(value="Select Category")
         self.category_dropdown = ttk.Combobox(
-            category_frame,
+            category_row,
             textvariable=self.category_var,
             values=["Agriculture", "Mining", "Recycling", "Manufacturing", "Waste"],
             font=("Poppins", 10),
             state="readonly"
         )
-        self.category_dropdown.pack(fill="x", ipady=3)
+        self.category_dropdown.pack(side="left", fill="x", expand=True, ipady=3)
         
-        # Location (right side)
-        location_frame = tk.Frame(row_frame, bg="white")
-        location_frame.pack(side="left", fill="x", expand=True)
+        # ========== LOCATION (Label left, field right) ==========
+        location_row = tk.Frame(inner_frame, bg="white")
+        location_row.pack(fill="x", pady=5)
         
         location_label = tk.Label(
-            location_frame,
-            text="Your Location (Optional)",
+            location_row,
+            text="Your Location (Optional):",
             bg="white",
             fg="#333333",
-            font=("Poppins", 11)
+            font=("Poppins", 11),
+            width=18,
+            anchor="w"
         )
-        location_label.pack(anchor="w", pady=(0, 3))
+        location_label.pack(side="left", padx=(0, 10))
         
         self.location_var = tk.StringVar(value="Select Location")
         self.location_dropdown = ttk.Combobox(
-            location_frame,
+            location_row,
             textvariable=self.location_var,
             values=["Lagos", "Abuja", "Port Harcourt", "Kano", "Aba", "Enugu", "Ibadan"],
             font=("Poppins", 10),
             state="readonly"
         )
-        self.location_dropdown.pack(fill="x", ipady=3)
+        self.location_dropdown.pack(side="left", fill="x", expand=True, ipady=3)
         
         # ========== ANALYZE BUTTON ==========
         analyze_btn = tk.Button(
@@ -252,7 +252,7 @@ class InputScreen:
             cursor="hand2",
             command=self.submit
         )
-        analyze_btn.pack(fill="x", pady=(8, 8), ipady=10)
+        analyze_btn.pack(fill="x", pady=(15, 8), ipady=10)
         
         # ========== BOTTOM NAVIGATION BAR ==========
         nav_frame = tk.Frame(self.frame, bg="#EADBC8", height=42)
