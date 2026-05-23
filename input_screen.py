@@ -1,10 +1,14 @@
 """
 Input Screen - Resource entry
 Developer: Kennedy (Input Systems Engineer)
+With Camera and Upload Functionality
 """
 
 import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import ttk, messagebox, filedialog
+import cv2
+from PIL import Image, ImageTk
+import os
 
 
 class InputScreen:
@@ -12,6 +16,8 @@ class InputScreen:
 
         self.parent = parent
         self.controller = controller
+        self.captured_image = None
+        self.webcam = None
 
         self.frame = tk.Frame(
             parent,
@@ -95,7 +101,8 @@ class InputScreen:
         )
 
         white_frame.pack(
-            fill="x",
+            fill="both",
+            expand=True,
             padx=70,
             pady=(0, 8)
         )
@@ -110,7 +117,8 @@ class InputScreen:
         )
 
         inner_frame.pack(
-            fill="x",
+            fill="both",
+            expand=True,
             padx=20,
             pady=14
         )
@@ -153,25 +161,27 @@ class InputScreen:
         # CAMERA CARD
         # ==========================================
 
-        camera_card = tk.Frame(
+        self.camera_card = tk.Frame(
             cards_frame,
             bg="white",
             bd=1,
             relief="solid",
-            height=120
+            height=120,
+            cursor="hand2"
         )
 
-        camera_card.grid(
+        self.camera_card.grid(
             row=0,
             column=0,
             sticky="nsew",
             padx=(0, 10)
         )
 
-        camera_card.grid_propagate(False)
+        self.camera_card.grid_propagate(False)
+        self.camera_card.bind("<Button-1>", self.open_camera)
 
         camera_icon = tk.Label(
-            camera_card,
+            self.camera_card,
             text="📷",
             bg="white",
             fg="#6B0F0F",
@@ -181,9 +191,10 @@ class InputScreen:
         camera_icon.pack(
             pady=(12, 2)
         )
+        camera_icon.bind("<Button-1>", self.open_camera)
 
         camera_title = tk.Label(
-            camera_card,
+            self.camera_card,
             text="Use Camera",
             bg="white",
             fg="#222222",
@@ -191,9 +202,10 @@ class InputScreen:
         )
 
         camera_title.pack()
+        camera_title.bind("<Button-1>", self.open_camera)
 
         camera_subtitle = tk.Label(
-            camera_card,
+            self.camera_card,
             text="Capture image using\nyour webcam",
             bg="white",
             fg="#777777",
@@ -202,30 +214,33 @@ class InputScreen:
         )
 
         camera_subtitle.pack()
+        camera_subtitle.bind("<Button-1>", self.open_camera)
 
         # ==========================================
         # UPLOAD CARD
         # ==========================================
 
-        upload_card = tk.Frame(
+        self.upload_card = tk.Frame(
             cards_frame,
             bg="white",
             bd=1,
             relief="solid",
-            height=120
+            height=120,
+            cursor="hand2"
         )
 
-        upload_card.grid(
+        self.upload_card.grid(
             row=0,
             column=1,
             sticky="nsew",
             padx=(10, 0)
         )
 
-        upload_card.grid_propagate(False)
+        self.upload_card.grid_propagate(False)
+        self.upload_card.bind("<Button-1>", self.upload_image)
 
         upload_icon = tk.Label(
-            upload_card,
+            self.upload_card,
             text="↑",
             bg="white",
             fg="#6B0F0F",
@@ -235,9 +250,10 @@ class InputScreen:
         upload_icon.pack(
             pady=(12, 2)
         )
+        upload_icon.bind("<Button-1>", self.upload_image)
 
         upload_title = tk.Label(
-            upload_card,
+            self.upload_card,
             text="Upload Image",
             bg="white",
             fg="#222222",
@@ -245,9 +261,10 @@ class InputScreen:
         )
 
         upload_title.pack()
+        upload_title.bind("<Button-1>", self.upload_image)
 
         upload_subtitle = tk.Label(
-            upload_card,
+            self.upload_card,
             text="Choose image from\nyour device",
             bg="white",
             fg="#777777",
@@ -256,6 +273,7 @@ class InputScreen:
         )
 
         upload_subtitle.pack()
+        upload_subtitle.bind("<Button-1>", self.upload_image)
 
         # ==========================================
         # DIVIDER
@@ -513,6 +531,121 @@ class InputScreen:
             )
 
     # ==========================================
+    # CAMERA FUNCTIONALITY
+    # ==========================================
+
+    def open_camera(self, event=None):
+        """Open webcam and capture image"""
+        
+        # Create camera window
+        camera_window = tk.Toplevel(self.frame)
+        camera_window.title("Capture Image")
+        camera_window.geometry("640x580")
+        camera_window.configure(bg="#F6EEDC")
+        
+        # Video label
+        video_label = tk.Label(camera_window, bg="black")
+        video_label.pack(pady=10)
+        
+        # Button frame
+        btn_frame = tk.Frame(camera_window, bg="#F6EEDC")
+        btn_frame.pack(pady=10)
+        
+        capture_btn = tk.Button(
+            btn_frame,
+            text="📸 CAPTURE",
+            bg="#7A0C0C",
+            fg="white",
+            font=("Poppins", 12, "bold"),
+            padx=20,
+            pady=5,
+            cursor="hand2"
+        )
+        capture_btn.pack(side="left", padx=10)
+        
+        cancel_btn = tk.Button(
+            btn_frame,
+            text="CANCEL",
+            bg="#999999",
+            fg="white",
+            font=("Poppins", 12, "bold"),
+            padx=20,
+            pady=5,
+            cursor="hand2",
+            command=camera_window.destroy
+        )
+        cancel_btn.pack(side="left", padx=10)
+        
+        # Start webcam
+        self.webcam = cv2.VideoCapture(0)
+        
+        def update_frame():
+            ret, frame = self.webcam.read()
+            if ret:
+                # Convert to RGB
+                frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                # Resize
+                frame_resized = cv2.resize(frame_rgb, (640, 480))
+                # Convert to PhotoImage
+                img = ImageTk.PhotoImage(Image.fromarray(frame_resized))
+                video_label.config(image=img)
+                video_label.image = img
+                # Store current frame for capture
+                self.current_frame = frame
+            
+            if self.webcam and self.webcam.isOpened():
+                camera_window.after(30, update_frame)
+        
+        def capture_image():
+            if hasattr(self, 'current_frame'):
+                # Save captured image
+                cv2.imwrite("captured_image.jpg", self.current_frame)
+                self.captured_image = "captured_image.jpg"
+                camera_window.destroy()
+                # Auto-fill resource name with "Captured Image"
+                self.resource_entry.delete(0, tk.END)
+                self.resource_entry.insert(0, "Captured Image")
+                self.resource_entry.config(fg="black")
+                messagebox.showinfo("Success", "Image captured successfully!\nYou can now analyze it.")
+        
+        capture_btn.config(command=capture_image)
+        
+        # Start video feed
+        update_frame()
+        
+        # Clean up when closed
+        def on_close():
+            if self.webcam and self.webcam.isOpened():
+                self.webcam.release()
+            camera_window.destroy()
+        
+        camera_window.protocol("WM_DELETE_WINDOW", on_close)
+
+    # ==========================================
+    # UPLOAD FUNCTIONALITY
+    # ==========================================
+
+    def upload_image(self, event=None):
+        """Upload image from device"""
+        
+        file_path = filedialog.askopenfilename(
+            title="Select an Image",
+            filetypes=[
+                ("Image files", "*.jpg *.jpeg *.png *.bmp *.gif"),
+                ("All files", "*.*")
+            ]
+        )
+        
+        if file_path:
+            self.captured_image = file_path
+            # Extract filename for resource entry
+            filename = os.path.basename(file_path).split('.')[0]
+            self.resource_entry.delete(0, tk.END)
+            self.resource_entry.insert(0, filename.replace('_', ' ').title())
+            self.resource_entry.config(fg="black")
+            messagebox.showinfo("Success", f"Image loaded: {filename}\nYou can now analyze it.")
+
+    # ==========================================
     # PLACEHOLDER METHODS
     # ==========================================
 
@@ -548,12 +681,18 @@ class InputScreen:
 
         resource = self.resource_entry.get().strip()
 
+        # Check if image was captured/uploaded
+        if self.captured_image and resource == "Captured Image":
+            # Here you would process the image for resource detection
+            # For now, just use the entered resource or detected one
+            pass
+        
         if resource == "" or resource == \
                 "Enter Resource (e.g Cassava, Sand, Plastic Bottles, Palm Oil)":
 
             messagebox.showwarning(
                 "Input Error",
-                "Please enter a resource name"
+                "Please enter a resource name or use Camera/Upload"
             )
 
             return
