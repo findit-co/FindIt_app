@@ -1,739 +1,315 @@
+"""
+Input Screen - Resource entry
+Developer: Kennedy (Input Systems Engineer)
+Design matches Figma exactly
+"""
 import tkinter as tk
-from tkinter import messagebox as msgbox, ttk 
+from tkinter import ttk, messagebox
 
 class InputScreen:
-
-    def __init__ (self, parent, controller):
+    def __init__(self, parent, controller):
         self.parent = parent
         self.controller = controller
-        self.frame = tk.Frame(parent)
+        self.frame = tk.Frame(parent, bg="#FDF5E0")
         self.build_ui()
 
     def build_ui(self):
-        self.create_header()
-        self.title_section()
-        self.main_section()
-        self.footer_navigation()
-    
-    #--------------------------------
-    #HEADER SECTION
-
-    def create_header(self):
-
-        #This is the header frame
-        self.header_frame = tk.Frame(
-        self.frame,
-        bg = "white",
-        height = 50
-        )
-
-        #Positioning the frame
-        self.header_frame.pack(fill="x")
-
-        #Find It title label
-        self.header_label = tk.Label(
-        self.header_frame,
-        text = "FIND IT",
-        bg = "white",
-        fg = "black",
-        font = ("Poppins", 16, "bold")
-        )
-
-        #Positioning the label inside the frame
-        self.header_label.pack(
-        side = "left",
-        padx = 15,
-        pady = 10
-        )
-
-    #--------------------------------
-    #TITLE SECTION
-
-    def title_section(self):
-
-        #This is the title frame
-        self.title_frame = tk.Frame(
-        self.frame,
-        bg = "#F2D9B0"
-        ) 
-
-        #Positioning the frame
-        self.title_frame.pack(fill="x")
-
-        #"Identify a Resource" Title
-        self.title_label = tk.Label(
-        self.title_frame,
-        text = "Identify a Resource",
-        bg = "#F2D9B0",
-        fg = "#3B0D06",
-        font = ("Poppins", 30, "bold")
-        )
-
-        #Positioning the title inside the frame
-        self.title_label.pack(
-        padx = 25,
-        pady = 20
-        )
-
-        #The subtitle
-        self.subtitle_label = tk.Label(
-        self.title_frame,
-        text = "Tell us what resource you have around you",
-        bg = "#F2D9B0",
-        fg = "black",
-        font = ("Poppins", 17)
-        )
-
-        #Positioning the subtitle inside the frame
-        self.subtitle_label.pack(
-        padx = 25,
-        pady = 20
-        )
-
-    #----------------------------------
-    #MAIN SECTION
-
-    def main_section(self):
-
-        # This is the main section frame
-        self.main_section_frame = tk.Frame(
-            self.frame,
-            bg= "#FDF5E0",
-            bd = 1,
-            relief = "solid"
-        )
-
-        # Positioning the frame
-        self.main_section_frame.pack(
-            fill="both",
-            padx=40,
-            pady=20
-        )
-
-        #---------------------------------
-        #"Choose Input Method" Frame 
-        self.main_title_frame = tk.Frame(
-            self.main_section_frame,
-            bg = "#FDF5E0"
-        )
-
-        #Positioning the frame
-        self.main_title_frame.pack(
-            fill = "x",
-            padx = 20,
-            pady = 10
-        )
-
-        #"Choose Input Method" Title
-        self.main_title_label = tk.Label(
-            self.main_title_frame,
-            text = "Choose Input Method",
-            bg = "#FDF5E0",
-            fg = "#3B0D06",
-            font = ("Poppins", 17, "bold")
-        )
-
-        #Positioning the title inside the frame
-        self.main_title_label.pack(
-            side = "left",
-            padx = 15,
-            pady = 10
-        )
-
-        #---------------------------------------------------
-        #Container holding Use Camera and Upload Image Cards
-        self.cards_container = tk.Frame(
-            self.main_section_frame,
-            bg = "#FDF5E0"
-        )
-
-        #Positioning the container
-        self.cards_container.pack(
-            fill = "x",
-            padx = 20,
-            pady = 10
-        )
-
-       #CAMERA CARD
-
-        self.camera_card = tk.Frame(
-            self.cards_container,
-            bg = "#FDF5E0",
-            bd = 1,
-            relief = "solid",
-            width = 300,
-            height = 140
-       )
-
-        #Positioning camera card to the left
-        self.camera_card.pack(
-            side = "left",
-            padx = 15,
-            pady = 10
-        )
-
-        #This prevents the frame from shrinking
-        self.camera_card.pack_propagate(False)
-
-        #Camera title
-        self.camera_title = tk.Label(
-            self.camera_card,
-            text = "Use Camera",
-            bg = "#FDF5E0",
-            fg = "black",
-            font = ("Poppins", 14, "bold")
-        )
-
-        self.camera_title.pack(pady = (35, 5))
-
-        #Camera subtitle
-        self.camera_subtitle = tk.Label(
-            self.camera_card,
-            text = "Capture image using \n your webcam",
-            bg = "#FDF5E0",
-            fg = "black",
-            font = ("Poppins", 10)
-        )
-
-        self.camera_subtitle.pack()
-
-        #UPLOAD CARD
-
-        self.upload_card = tk.Frame(
-            self.cards_container,
-            bg = "#FDF5E0",
-            bd = 1,
-            relief = "solid",
-            width = 300,
-            height = 140
-        )
-
-        #This positions the upload card beside camera card
-        self.upload_card.pack(
-            side = "left",
-            padx = 15,
-            pady = 10
-        ) 
-
-        #This prevents the frame from shrinking
-        self.upload_card.pack_propagate(False)
-
-        #Upload title
-        self.upload_title = tk.Label(
-            self.upload_card,
-            text = "Upload Gallery",
-            bg = "#FDF5E0",
-            fg = "black",
-            font = ("Poppins", 14, "bold")
-        )
-
-        self.upload_title.pack(pady=(35, 5))
-
-        #Upload subtitle
-        self.upload_subtitle = tk.Label(
-            self.upload_card,
-            text = "Choose image from \n your device",
-            bg = "#FDF5E0",
-            fg = "black",
-            font = ("Poppins", 10)
-        )
-
-        self.upload_subtitle.pack()
-
-        #-----------------------------------------------------------
-        #The dividing line that separates image input and text input
-        self.divider_line = tk.Frame(
-            self.main_section_frame,
-            bg = "black",
-            height = 1
-        )
-
-        #Positioning the frame
-        self.divider_line.pack(
-            fill = "x",
-            padx = 20,
-            pady = 10
-        )
-
-        #----------------------------------
-        #"Or Enter Details..." Section
-        self.details_section_frame = tk.Frame(
-            self.main_section_frame,
-            bg = "#FDF5E0"
-        )
-
-        #Positioning the Frame
-        self.details_section_frame.pack(
-            fill = "x",
-            padx = 20,
-            pady = 10
-        )
-
-        #Title Frame
-        self.details_title_frame = tk.Frame(
-            self.details_section_frame,
-            bg="#FDF5E0"
-        )
-
-        self.details_title_frame.pack(
-            fill="x"
-        )
-
-        #"Or Enter Details..." Title
-        self.details_section_label = tk.Label(
-            self.details_section_frame,
-            text = "Or Enter Details (Optional)",
-            bg = "#FDF5E0",
-            fg = "#3B0D06",
-            font = ("Poppins", 17, "bold")
-        )
-
-         #Positioning the title inside the frame
-        self.details_section_label.pack(
-            side = "left"
-        )
-
-        #Entry Frame
-
-        self.entry_frame = tk.Frame(
-            self.details_section_frame,
-            bg="#FDF5E0"
-        )
-
-        self.entry_frame.pack(
-            fill="x",
-            pady=10
-        )
-
-        #--------------------
-        #Resource Entry Field
-        self.resource_entry = tk.Entry(
-            self.details_section_frame,
+        # Make frame fill entire window
+        self.frame.pack(fill="both", expand=True)
+        
+        # ========== HEADER ==========
+        header_frame = tk.Frame(self.frame, bg="white", height=50)
+        header_frame.pack(fill="x", side="top")
+        header_frame.pack_propagate(False)
+        
+        header_label = tk.Label(
+            header_frame,
+            text="FIND IT",
             bg="white",
-            fg="black",
+            fg="#5A1207",
+            font=("Poppins", 18, "bold")
+        )
+        header_label.pack(side="left", padx=25, pady=12)
+        
+        # ========== TITLE SECTION ==========
+        title_frame = tk.Frame(self.frame, bg="#F2D9B0")
+        title_frame.pack(fill="x", side="top")
+        
+        title_label = tk.Label(
+            title_frame,
+            text="Identify a Resource",
+            bg="#F2D9B0",
+            fg="#3B0D06",
+            font=("Poppins", 32, "bold")
+        )
+        title_label.pack(pady=(15, 5))
+        
+        subtitle_label = tk.Label(
+            title_frame,
+            text="Tell us what resource you have around you",
+            bg="#F2D9B0",
+            fg="#333333",
+            font=("Poppins", 16)
+        )
+        subtitle_label.pack(pady=(0, 15))
+        
+        # ========== MAIN CONTENT (NO SCROLL) ==========
+        main_frame = tk.Frame(self.frame, bg="#FDF5E0")
+        main_frame.pack(fill="both", expand=True, padx=50, pady=10)
+        
+        # "Choose Input Method" title
+        method_label = tk.Label(
+            main_frame,
+            text="Choose Input Method",
+            bg="#FDF5E0",
+            fg="#3B0D06",
+            font=("Poppins", 18, "bold")
+        )
+        method_label.pack(anchor="w", pady=(0, 10))
+        
+        # Camera and Upload cards - side by side
+        cards_frame = tk.Frame(main_frame, bg="#FDF5E0")
+        cards_frame.pack(fill="x", pady=(0, 15))
+        
+        # Camera Card
+        camera_card = tk.Frame(
+            cards_frame,
+            bg="white",
+            relief="solid",
+            bd=1,
+            width=320,
+            height=130
+        )
+        camera_card.pack(side="left", padx=(0, 40), expand=True, fill="x")
+        camera_card.pack_propagate(False)
+        
+        camera_icon = tk.Label(
+            camera_card,
+            text="📷",
+            bg="white",
+            fg="#5A1207",
+            font=("Segoe UI Symbol", 32)
+        )
+        camera_icon.pack(pady=(20, 5))
+        
+        camera_title = tk.Label(
+            camera_card,
+            text="Use Camera",
+            bg="white",
+            fg="#3B0D06",
+            font=("Poppins", 14, "bold")
+        )
+        camera_title.pack()
+        
+        camera_subtitle = tk.Label(
+            camera_card,
+            text="Capture image using your webcam",
+            bg="white",
+            fg="#888888",
+            font=("Poppins", 10)
+        )
+        camera_subtitle.pack(pady=(5, 15))
+        
+        # Upload Card
+        upload_card = tk.Frame(
+            cards_frame,
+            bg="white",
+            relief="solid",
+            bd=1,
+            width=320,
+            height=130
+        )
+        upload_card.pack(side="left", expand=True, fill="x")
+        upload_card.pack_propagate(False)
+        
+        upload_icon = tk.Label(
+            upload_card,
+            text="🖼️",
+            bg="white",
+            fg="#5A1207",
+            font=("Segoe UI Symbol", 32)
+        )
+        upload_icon.pack(pady=(20, 5))
+        
+        upload_title = tk.Label(
+            upload_card,
+            text="Upload Image",
+            bg="white",
+            fg="#3B0D06",
+            font=("Poppins", 14, "bold")
+        )
+        upload_title.pack()
+        
+        upload_subtitle = tk.Label(
+            upload_card,
+            text="Choose image from your device",
+            bg="white",
+            fg="#888888",
+            font=("Poppins", 10)
+        )
+        upload_subtitle.pack(pady=(5, 15))
+        
+        # Divider line
+        divider = tk.Frame(main_frame, bg="#CCCCCC", height=1)
+        divider.pack(fill="x", pady=10)
+        
+        # "Or Enter Details (Optional)" section
+        details_label = tk.Label(
+            main_frame,
+            text="Or Enter Details (Optional)",
+            bg="#FDF5E0",
+            fg="#3B0D06",
+            font=("Poppins", 16, "bold")
+        )
+        details_label.pack(anchor="w", pady=(10, 10))
+        
+        # Resource Entry Field
+        resource_frame = tk.Frame(main_frame, bg="#FDF5E0")
+        resource_frame.pack(fill="x", pady=(0, 15))
+        
+        self.resource_entry = tk.Entry(
+            resource_frame,
+            bg="white",
+            fg="#888888",
             font=("Poppins", 12),
             relief="solid",
             bd=1
         )
-
-        #Placeholder text
-        self.resource_entry.insert(
-            0,
-            "Enter Resource (e.g. Cassava, Sand, Plastic Bottles, Palm Oil)"
-        )
-
-        #Positioning the entry field
-        self.resource_entry.pack(
-            fill="x",
-            padx=15,
-            pady=10,
-            ipady=8
-        )
-
-        #------------------------------
-        #Category and Location Dropdown
-        self.dropdown_section = tk.Frame(
-            self.main_section_frame,
-            bg = "#FDF5E0"
-        )
-
-        #Positioning the container
-        self.dropdown_section.pack(
-            fill = "x",
-            padx = 20,
-            pady = 10
-        )
-
-        #CATEGORY ROW
-
-        self.category_row = tk.Frame(
-            self.dropdown_section,
-            bg="#FDF5E0"
-        )
-
-        #Positioning it in the frame
-        self.category_row.pack(
-            fill="x",
-            pady=5
-        )
-
-        # Category label
-        self.category_label = tk.Label(
-            self.category_row,
+        self.resource_entry.pack(fill="x", ipady=10)
+        self.resource_entry.insert(0, "Enter Resource (e.g. Cassava, Sand, Plastic Bottles, Palm Oil)")
+        
+        # Bind placeholder behavior
+        self.resource_entry.bind("<FocusIn>", self.clear_placeholder)
+        self.resource_entry.bind("<FocusOut>", self.restore_placeholder)
+        
+        # Category and Location row (side by side)
+        row_frame = tk.Frame(main_frame, bg="#FDF5E0")
+        row_frame.pack(fill="x", pady=(0, 15))
+        
+        # Category (left side)
+        category_frame = tk.Frame(row_frame, bg="#FDF5E0")
+        category_frame.pack(side="left", fill="x", expand=True, padx=(0, 20))
+        
+        category_label = tk.Label(
+            category_frame,
             text="Category (Optional)",
             bg="#FDF5E0",
-            fg="black",
+            fg="#333333",
             font=("Poppins", 12)
         )
-
-        self.category_label.pack(
-            side="left"
-        )
-
-        # Category dropdown using ttk.Combobox
-
-        self.category_var = tk.StringVar(value="Agriculture")
-
+        category_label.pack(anchor="w", pady=(0, 5))
+        
+        self.category_var = tk.StringVar(value="Select Category")
         self.category_dropdown = ttk.Combobox(
-            self.category_row,
+            category_frame,
             textvariable=self.category_var,
-            values=[
-                "Agriculture",
-                "Mining",
-                "Recycling",
-                "Manufacturing"
-            ],
-            font=("Poppins", 12),
-            state="readonly",
-            width=20
+            values=["Agriculture", "Mining", "Recycling", "Manufacturing", "Waste"],
+            font=("Poppins", 11),
+            state="readonly"
         )
-
-        self.category_dropdown.pack(
-            side="right",
-            padx=10
-        )
-
-        #LOCATION ROW
-
-        self.location_row = tk.Frame(
-            self.dropdown_section,
-            bg="#FDF5E0"
-        )
-
-        self.location_row.pack(
-            fill="x",
-            pady=5
-        )
-
-        #Location label
-        self.location_label = tk.Label(
-            self.location_row,
+        self.category_dropdown.pack(fill="x", ipady=5)
+        
+        # Location (right side)
+        location_frame = tk.Frame(row_frame, bg="#FDF5E0")
+        location_frame.pack(side="left", fill="x", expand=True)
+        
+        location_label = tk.Label(
+            location_frame,
             text="Your Location (Optional)",
             bg="#FDF5E0",
-            fg="black",
+            fg="#333333",
             font=("Poppins", 12)
         )
-
-        self.location_label.pack(
-            side="left"
-        )
-
-        # Location dropdown using ttk.Combobox
-        self.location_var = tk.StringVar(value = "Lagos")
-
-        self.location_dropdown = ttk.Combobox(
-            self.location_row,
-            textvariable=self.location_var,
-            values=[
-                "Lagos",
-                "Abuja",
-                "Port Harcourt",
-                "Kano",
-                "Aba"
-            ],
-            font=("Poppins", 12),
-            state="readonly",
-            width=20
-        )
-
-        self.location_dropdown.pack(
-                side="right",
-                padx=10
-        )
-
-        #--------------------
-        #Analyze Resources Button
-
-        self.analyze_button_frame = tk.Frame(
-            self.main_section_frame,
-            bg="#FDF5E0"
-        )
+        location_label.pack(anchor="w", pady=(0, 5))
         
-        # Positioning the frame
-        self.analyze_button_frame.pack(
-            fill="x",
-            padx=20,
-            pady=20
+        self.location_var = tk.StringVar(value="Select Location")
+        self.location_dropdown = ttk.Combobox(
+            location_frame,
+            textvariable=self.location_var,
+            values=["Lagos", "Abuja", "Port Harcourt", "Kano", "Aba", "Enugu", "Ibadan"],
+            font=("Poppins", 11),
+            state="readonly"
         )
-
-        # Analyze button
-        self.analyze_button = tk.Button(
-            self.analyze_button_frame,
+        self.location_dropdown.pack(fill="x", ipady=5)
+        
+        # ANALYZE RESOURCES Button
+        analyze_btn = tk.Button(
+            main_frame,
             text="ANALYZE RESOURCES",
             bg="#5A1207",
             fg="white",
             font=("Poppins", 14, "bold"),
             relief="flat",
-            bd=0,
             cursor="hand2",
+            padx=40,
+            pady=12,
             command=self.submit
         )
-
-        # Positioning the button
-        self.analyze_button.pack(
-            fill="x",
-            ipady=12
-        )
-
-    # -----------------------------------
-    #FOOTER NAVIGATION SECTION
-
-    def footer_navigation(self):
-
-        self.footer_frame = tk.Frame(
-            self.frame,
-            bg="white",
-            height=80
-        )
-
-        #Positioning the footer
-        self.footer_frame.pack(
-            fill="x",
-            side="bottom"
-        )
-
-        #Prevent footer from shrinking
-        self.footer_frame.pack_propagate(False)
-
-        #Home Navigation Item
-        self.home_nav = tk.Frame(
-            self.footer_frame,
-            bg="white"
-        )
-
-        #Positioning it
-        self.home_nav.pack(
-            side="left",
-            expand=True,
-            pady=10
-        )
-
-        #Home icon placeholder
-        self.home_icon = tk.Label(
-            self.home_nav,
-            text="🏠",
-            bg="white",
-            font=("Arial", 20)
-        )
-
-        #Positioning it
-        self.home_icon.pack()
-
-        #Home text
-        self.home_text = tk.Label(
-            self.home_nav,
-            text="Home",
-            bg="white",
-            fg="black",
-            font=("Poppins", 10)
-        )
-
-        #Positioning it
-        self.home_text.pack()
-
-        # Bind click events to Home navigation
-        self.home_nav.bind(
-            "<Button-1>",
-            lambda e: self.controller.show_screen("home")
-        )
-
-        self.home_icon.bind(
-            "<Button-1>",
-            lambda e: self.controller.show_screen("home")
-        )
-
-        self.home_text.bind(
-            "<Button-1>",
-            lambda e: self.controller.show_screen("home")
-        )
-
-        #Input Navigation Item
-        self.input_nav = tk.Frame(
-            self.footer_frame,
-            bg="white"
-        )
-
-        #Positioning it
-        self.input_nav.pack(
-            side="left",
-            expand=True,
-            pady=10
-        )
-
-        #Input icon placeholder
-        self.input_icon = tk.Label(
-            self.input_nav,
-            text="📷",
-            bg="white",
-            font=("Arial", 20)
-        )
-
-        #Positioning it
-        self.input_icon.pack()
-
-        #Input text
-        self.input_text = tk.Label(
-            self.input_nav,
-            text="Input",
-            bg="white",
-            fg="black",
-            font=("Poppins", 10)
-        )
-
-        #Positioning it
-        self.input_text.pack()
-
-        # Bind click events to Input navigation
-        self.input_nav.bind(
-            "<Button-1>",
-            lambda e: self.controller.show_screen("input")
-        )
-
-        self.input_icon.bind(
-            "<Button-1>",
-            lambda e: self.controller.show_screen("input")
-        )
-
-        self.input_text.bind(
-            "<Button-1>",
-            lambda e: self.controller.show_screen("input")
-        )
-
-        #Results Navigation Item
-
-        self.results_nav = tk.Frame(
-            self.footer_frame,
-            bg="white"
-        )
-
-        #Positioning it
-        self.results_nav.pack(
-            side="left",
-            expand=True,
-            pady=10
-        )
-
-         #Results icon placeholder
-        self.results_icon = tk.Label(
-            self.results_nav,
-            text="📄",
-            bg="white",
-            font=("Arial", 20)
-        )
-
-        #Positioning it
-        self.results_icon.pack()
-
-        #Results text
-        self.results_text = tk.Label(
-            self.results_nav,
-            text="Results",
-            bg="white",
-            fg="black",
-            font=("Poppins", 10)
-        )
-
-        #Positioning it
-        self.results_text.pack()
-
-        # Bind click events to Results navigation
-        self.results_nav.bind(
-        "<Button-1>",
-        lambda e: self.controller.show_screen("results")
-        )
-
-        self.results_icon.bind(
-            "<Button-1>",
-            lambda e: self.controller.show_screen("results")
-        )
-
-        self.results_text.bind(
-            "<Button-1>",
-            lambda e: self.controller.show_screen("results")
-        )
-
-        #Dashboard Navigation Item
-
-        self.dashboard_nav = tk.Frame(
-            self.footer_frame,
-            bg="white"
-        )
-
-        self.dashboard_nav.pack(
-            side="left",
-            expand=True,
-            pady=10
-        )
-
-        #Dashboard icon placeholder
-        self.dashboard_icon = tk.Label(
-            self.dashboard_nav,
-            text="📊",
-            bg="white",
-            font=("Arial", 20)
-        )
-
-        #Positioning it
-        self.dashboard_icon.pack()
-
-        # Dashboard text
-        self.dashboard_text = tk.Label(
-            self.dashboard_nav,
-            text="Dashboard",
-            bg="white",
-            fg="black",
-            font=("Poppins", 10)
-        )
-
-        #Positioning it
-        self.dashboard_text.pack()
-
-        # Bind click events to Dashboard navigation
-        self.dashboard_nav.bind(
-            "<Button-1>",
-            lambda e: self.controller.show_screen("dashboard")
-        )
-
-        self.dashboard_icon.bind(
-            "<Button-1>",
-            lambda e: self.controller.show_screen("dashboard")
-        )
-
-        self.dashboard_text.bind(
-            "<Button-1>",
-            lambda e: self.controller.show_screen("dashboard")
-        )
-
-    #-------------    
-    #Submit Method
-
+        analyze_btn.pack(pady=(10, 20))
+        
+        # ========== BOTTOM NAVIGATION ==========
+        nav_frame = tk.Frame(self.frame, bg="#EADBC8", height=45)
+        nav_frame.pack(fill="x", side="bottom")
+        nav_frame.pack_propagate(False)
+        
+        nav_inner = tk.Frame(nav_frame, bg="#EADBC8")
+        nav_inner.pack(expand=True)
+        
+        # Navigation buttons matching Figma
+        nav_items = [
+            ("Home", "home"),
+            ("Input", "input"),
+            ("Results", "results"),
+            ("Dashboard", "dashboard")
+        ]
+        
+        for text, screen in nav_items:
+            btn = tk.Button(
+                nav_inner,
+                text=text,
+                font=("Poppins", 11),
+                bg="#EADBC8",
+                fg="#3B0D06" if screen != "input" else "#5A1207",
+                bd=0,
+                cursor="hand2",
+                command=lambda s=screen: self.controller.show_screen(s)
+            )
+            btn.pack(side="left", padx=25, pady=10)
+    
+    def clear_placeholder(self, event):
+        """Clear placeholder text when user clicks"""
+        if self.resource_entry.get() == "Enter Resource (e.g. Cassava, Sand, Plastic Bottles, Palm Oil)":
+            self.resource_entry.delete(0, tk.END)
+            self.resource_entry.config(fg="black")
+    
+    def restore_placeholder(self, event):
+        """Restore placeholder if field is empty"""
+        if self.resource_entry.get().strip() == "":
+            self.resource_entry.insert(0, "Enter Resource (e.g. Cassava, Sand, Plastic Bottles, Palm Oil)")
+            self.resource_entry.config(fg="#888888")
+    
     def submit(self):
-
-        #Get user input
+        """Get user input and send to controller"""
         resource = self.resource_entry.get().strip()
+        
+        # Check if it's placeholder or empty
+        if resource == "" or resource == "Enter Resource (e.g. Cassava, Sand, Plastic Bottles, Palm Oil)":
+            messagebox.showwarning("Input Error", "Please enter a resource name")
+            return
+        
         category = self.category_var.get()
         location = self.location_var.get()
-
-        #Validate resource input
-        if not resource:
-
-            msgbox.showwarning(
-                "Input Error",
-                "Please enter a resource name"
-            )
-
-            return
-
-        #Send data to controller 
-        self.controller.set_resource_input(
-            resource,
-            category,
-            location
-        )
-
-        #Navigate to results screen
+        
+        # Validate category/location selections
+        if category == "Select Category":
+            category = "General"
+        if location == "Select Location":
+            location = "Lagos"
+        
+        # Send to controller
+        self.controller.set_resource_input(resource, category, location)
         self.controller.show_screen("results")
-
+    
     def show(self):
         """Show the screen"""
         self.frame.pack(fill="both", expand=True)
@@ -741,9 +317,3 @@ class InputScreen:
     def hide(self):
         """Hide the screen"""
         self.frame.pack_forget()
-
-
-
-
-    
-
