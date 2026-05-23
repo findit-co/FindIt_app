@@ -4,6 +4,10 @@ from tkinter import ttk,messagebox
 import csv
 from datetime import datetime
 from HomePage import HomeScreen
+from input_screen import InputScreen
+from results_screen import ResultsScreen
+from dashboard_screen import DashboardScreen
+from resource_engine import ResourceEngine
 
 class BaseScreen:
     """
@@ -36,7 +40,7 @@ class FindItApp:
         self.current_resource = None # stores input from InputScreen
         self.search_results = None # Stores results from ResourceEngine
         # Initialize components(teammates will create these)
-        self.resource_engine = None #Dilibe will create ResourceEngine
+        self.resource_engine = ResourceEngine("resources.csv")
         self.data_manager = None  # Kene will create DataManager
         #Initialize all screens
         self.screens = {}
