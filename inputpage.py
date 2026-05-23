@@ -1,7 +1,13 @@
 import tkinter as tk
-from tkinter import messagebox as msgbox
+from tkinter import messagebox as msgbox, ttk 
 
-class InputScreen(BaseScreen):
+class InputScreen:
+
+    def __init__ (self, parent, controller):
+        self.parent = parent
+        self.controller = controller
+        self.frame = tk.Frame(parent)
+        self.build_ui()
 
     def build_ui(self):
         self.create_header()
@@ -16,29 +22,29 @@ class InputScreen(BaseScreen):
 
         #This is the header frame
         self.header_frame = tk.Frame(
-        self,
+        self.frame,
         bg = "white",
         height = 50
-    )
+        )
 
-    #Positioning the frame
-    self.header_frame.pack(fill="x")
+        #Positioning the frame
+        self.header_frame.pack(fill="x")
 
-    #Find It title label
-    self.header_label = tk.Label(
+        #Find It title label
+        self.header_label = tk.Label(
         self.header_frame,
         text = "FIND IT",
         bg = "white",
         fg = "black",
         font = ("Poppins", 16, "bold")
-    )
+        )
 
-    #Positioning the label inside the frame
-    self.header_label.pack(
+        #Positioning the label inside the frame
+        self.header_label.pack(
         side = "left",
         padx = 15,
         pady = 10
-    )
+        )
 
     #--------------------------------
     #TITLE SECTION
@@ -47,42 +53,42 @@ class InputScreen(BaseScreen):
 
         #This is the title frame
         self.title_frame = tk.Frame(
-        self,
+        self.frame,
         bg = "#F2D9B0"
         ) 
 
-    #Positioning the frame
-    self.title_frame.pack(fill="x")
+        #Positioning the frame
+        self.title_frame.pack(fill="x")
 
-    #"Identify a Resource" Title
-    self.title_label = tk.Label(
+        #"Identify a Resource" Title
+        self.title_label = tk.Label(
         self.title_frame,
         text = "Identify a Resource",
         bg = "#F2D9B0",
         fg = "#3B0D06",
         font = ("Poppins", 30, "bold")
-    )
+        )
 
-    #Positioning the title inside the frame
-    self.title_label.pack(
+        #Positioning the title inside the frame
+        self.title_label.pack(
         padx = 25,
         pady = 20
-    )
+        )
 
-    #The subtitle
-    self.subtitle_label = tk.Label(
+        #The subtitle
+        self.subtitle_label = tk.Label(
         self.title_frame,
         text = "Tell us what resource you have around you",
         bg = "#F2D9B0",
         fg = "black",
         font = ("Poppins", 17)
-    )
+        )
 
-    #Positioning the subtitle inside the frame
-    self.subtitle_label.pack(
+        #Positioning the subtitle inside the frame
+        self.subtitle_label.pack(
         padx = 25,
         pady = 20
-    )
+        )
 
     #----------------------------------
     #MAIN SECTION
@@ -91,10 +97,10 @@ class InputScreen(BaseScreen):
 
         # This is the main section frame
         self.main_section_frame = tk.Frame(
-            self,
+            self.frame,
             bg= "#FDF5E0",
             bd = 1,
-            relief = "spy inputpage.pyolid"
+            relief = "solid"
         )
 
         # Positioning the frame
@@ -148,7 +154,7 @@ class InputScreen(BaseScreen):
             pady = 10
         )
 
-       #CAMERA CARD FRAME
+       #CAMERA CARD
 
         self.camera_card = tk.Frame(
             self.cards_container,
@@ -191,11 +197,11 @@ class InputScreen(BaseScreen):
 
         self.camera_subtitle.pack()
 
-        #UPLOAD CARD FRAME
+        #UPLOAD CARD
 
         self.upload_card = tk.Frame(
             self.cards_container,
-            bg = "FDF5E0",
+            bg = "#FDF5E0",
             bd = 1,
             relief = "solid",
             width = 300,
@@ -250,7 +256,7 @@ class InputScreen(BaseScreen):
         )
 
         #----------------------------------
-        #"Or Enter Details..." Frame
+        #"Or Enter Details..." Section
         self.details_section_frame = tk.Frame(
             self.main_section_frame,
             bg = "#FDF5E0"
@@ -261,6 +267,16 @@ class InputScreen(BaseScreen):
             fill = "x",
             padx = 20,
             pady = 10
+        )
+
+        #Title Frame
+        self.details_title_frame = tk.Frame(
+            self.details_section_frame,
+            bg="#FDF5E0"
+        )
+
+        self.details_title_frame.pack(
+            fill="x"
         )
 
         #"Or Enter Details..." Title
@@ -275,6 +291,18 @@ class InputScreen(BaseScreen):
          #Positioning the title inside the frame
         self.details_section_label.pack(
             side = "left"
+        )
+
+        #Entry Frame
+
+        self.entry_frame = tk.Frame(
+            self.details_section_frame,
+            bg="#FDF5E0"
+        )
+
+        self.entry_frame.pack(
+            fill="x",
+            pady=10
         )
 
         #--------------------
@@ -342,19 +370,27 @@ class InputScreen(BaseScreen):
             side="left"
         )
 
-        # Category dropdown
-        self.category_dropdown = tk.OptionMenu(
+        # Category dropdown using ttk.Combobox
+
+        self.category_var = tk.StringVar(value="Agriculture")
+
+        self.category_dropdown = ttk.Combobox(
             self.category_row,
-            tk.StringVar(),
-            "Agriculture",
-            "Mining",
-            "Recycling",
-            "Manufacturing",
-            #Other Categories could be added later
+            textvariable=self.category_var,
+            values=[
+                "Agriculture",
+                "Mining",
+                "Recycling",
+                "Manufacturing"
+            ],
+            font=("Poppins", 12),
+            state="readonly",
+            width=20
         )
 
         self.category_dropdown.pack(
-            side="right"
+            side="right",
+            padx=10
         )
 
         #LOCATION ROW
@@ -382,19 +418,27 @@ class InputScreen(BaseScreen):
             side="left"
         )
 
-        # Location dropdown
-        self.location_dropdown = tk.OptionMenu(
+        # Location dropdown using ttk.Combobox
+        self.location_var = tk.StringVar(value = "Lagos")
+
+        self.location_dropdown = ttk.Combobox(
             self.location_row,
-            tk.StringVar(),
-            "Lagos",
-            "Abuja",
-            "Port Harcourt",
-            "Kano",
-            #Other locations could be added later
+            textvariable=self.location_var,
+            values=[
+                "Lagos",
+                "Abuja",
+                "Port Harcourt",
+                "Kano",
+                "Aba"
+            ],
+            font=("Poppins", 12),
+            state="readonly",
+            width=20
         )
 
         self.location_dropdown.pack(
-                side="right"
+                side="right",
+                padx=10
         )
 
         #--------------------
@@ -421,7 +465,8 @@ class InputScreen(BaseScreen):
             font=("Poppins", 14, "bold"),
             relief="flat",
             bd=0,
-            cursor="hand2"
+            cursor="hand2",
+            command=self.submit
         )
 
         # Positioning the button
@@ -433,166 +478,261 @@ class InputScreen(BaseScreen):
     # -----------------------------------
     #FOOTER NAVIGATION SECTION
 
-    self.footer_frame = tk.Frame(
-        self,
-        bg="white",
-        height=80
-    )
+    def footer_navigation(self):
 
-    #Positioning the footer
-    self.footer_frame.pack(
-        fill="x",
-        side="bottom"
-    )
+        self.footer_frame = tk.Frame(
+            self.frame,
+            bg="white",
+            height=80
+        )
 
-    #Prevent footer from shrinking
-    self.footer_frame.pack_propagate(False)
+        #Positioning the footer
+        self.footer_frame.pack(
+            fill="x",
+            side="bottom"
+        )
 
-    #Home Navigation Item
-    self.home_nav = tk.Frame(
-        self.footer_frame,
-        bg="white"
-    )
+        #Prevent footer from shrinking
+        self.footer_frame.pack_propagate(False)
 
-    #Positioning it
-    self.home_nav.pack(
-        side="left",
-        expand=True,
-        pady=10
-    )
+        #Home Navigation Item
+        self.home_nav = tk.Frame(
+            self.footer_frame,
+            bg="white"
+        )
 
-    #Home icon placeholder
-    self.home_icon = tk.Label(
-        self.home_nav,
-        text="🏠",
-        bg="white",
-        font=("Arial", 20)
-    )
+        #Positioning it
+        self.home_nav.pack(
+            side="left",
+            expand=True,
+            pady=10
+        )
 
-    #Positioning it
-    self.home_icon.pack()
+        #Home icon placeholder
+        self.home_icon = tk.Label(
+            self.home_nav,
+            text="🏠",
+            bg="white",
+            font=("Arial", 20)
+        )
 
-    #Home text
-    self.home_text = tk.Label(
-        self.home_nav,
-        text="Home",
-        bg="white",
-        fg="black",
-        font=("Poppins", 10)
-    )
+        #Positioning it
+        self.home_icon.pack()
 
-    #Positioning it
-    self.home_text.pack()
+        #Home text
+        self.home_text = tk.Label(
+            self.home_nav,
+            text="Home",
+            bg="white",
+            fg="black",
+            font=("Poppins", 10)
+        )
 
-    #Input Navigation Item
-    self.input_nav = tk.Frame(
-        self.footer_frame,
-        bg="white"
-    )
+        #Positioning it
+        self.home_text.pack()
 
-    #Positioning it
-    self.input_nav.pack(
-        side="left",
-        expand=True,
-        pady=10
-    )
+        # Bind click events to Home navigation
+        self.home_nav.bind(
+            "<Button-1>",
+            lambda e: self.controller.show_screen("home")
+        )
 
-    #Input icon placeholder
-    self.input_icon = tk.Label(
-        self.input_nav,
-        text="📷",
-        bg="white",
-        font=("Arial", 20)
-    )
+        self.home_icon.bind(
+            "<Button-1>",
+            lambda e: self.controller.show_screen("home")
+        )
 
-    #Positioning it
-    self.input_icon.pack()
+        self.home_text.bind(
+            "<Button-1>",
+            lambda e: self.controller.show_screen("home")
+        )
 
-    #Input text
-    self.input_text = tk.Label(
-        self.input_nav,
-        text="Input",
-        bg="white",
-        fg="black",
-        font=("Poppins", 10)
-    )
+        #Input Navigation Item
+        self.input_nav = tk.Frame(
+            self.footer_frame,
+            bg="white"
+        )
 
-    #Positioning it
-    self.input_text.pack()
+        #Positioning it
+        self.input_nav.pack(
+            side="left",
+            expand=True,
+            pady=10
+        )
 
-    #Results Navigation Item
+        #Input icon placeholder
+        self.input_icon = tk.Label(
+            self.input_nav,
+            text="📷",
+            bg="white",
+            font=("Arial", 20)
+        )
 
-    self.results_nav = tk.Frame(
-        self.footer_frame,
-        bg="white"
-    )
+        #Positioning it
+        self.input_icon.pack()
 
-    #Positioning it
-    self.results_nav.pack(
-        side="left",
-        expand=True,
-        pady=10
-    )
+        #Input text
+        self.input_text = tk.Label(
+            self.input_nav,
+            text="Input",
+            bg="white",
+            fg="black",
+            font=("Poppins", 10)
+        )
 
-    #Results icon placeholder
-    self.results_icon = tk.Label(
-        self.results_nav,
-        text="📄",
-        bg="white",
-        font=("Arial", 20)
-    )
+        #Positioning it
+        self.input_text.pack()
 
-    #Positioning it
-    self.results_icon.pack()
+        # Bind click events to Input navigation
+        self.input_nav.bind(
+            "<Button-1>",
+            lambda e: self.controller.show_screen("input")
+        )
 
-    #Results text
-    self.results_text = tk.Label(
-        self.results_nav,
-        text="Results",
-        bg="white",
-        fg="black",
-        font=("Poppins", 10)
-    )
+        self.input_icon.bind(
+            "<Button-1>",
+            lambda e: self.controller.show_screen("input")
+        )
 
-    #Positioning it
-    self.results_text.pack()
+        self.input_text.bind(
+            "<Button-1>",
+            lambda e: self.controller.show_screen("input")
+        )
 
-    #Dashboard Navigation Item
+        #Results Navigation Item
 
-    self.dashboard_nav = tk.Frame(
-        self.footer_frame,
-        bg="white"
-    )
+        self.results_nav = tk.Frame(
+            self.footer_frame,
+            bg="white"
+        )
 
-    self.dashboard_nav.pack(
-        side="left",
-        expand=True,
-        pady=10
-    )
+        #Positioning it
+        self.results_nav.pack(
+            side="left",
+            expand=True,
+            pady=10
+        )
 
-    #Dashboard icon placeholder
-    self.dashboard_icon = tk.Label(
-        self.dashboard_nav,
-        text="📊",
-        bg="white",
-        font=("Arial", 20)
-    )
+         #Results icon placeholder
+        self.results_icon = tk.Label(
+            self.results_nav,
+            text="📄",
+            bg="white",
+            font=("Arial", 20)
+        )
 
-    #Positioning it
-    self.dashboard_icon.pack()
+        #Positioning it
+        self.results_icon.pack()
 
-    # Dashboard text
-    self.dashboard_text = tk.Label(
-        self.dashboard_nav,
-        text="Dashboard",
-        bg="white",
-        fg="black",
-        font=("Poppins", 10)
-    )
+        #Results text
+        self.results_text = tk.Label(
+            self.results_nav,
+            text="Results",
+            bg="white",
+            fg="black",
+            font=("Poppins", 10)
+        )
 
-    #Positioning it
-    self.dashboard_text.pack()
+        #Positioning it
+        self.results_text.pack()
 
+        # Bind click events to Results navigation
+        self.results_nav.bind(
+        "<Button-1>",
+        lambda e: self.controller.show_screen("results")
+        )
+
+        self.results_icon.bind(
+            "<Button-1>",
+            lambda e: self.controller.show_screen("results")
+        )
+
+        self.results_text.bind(
+            "<Button-1>",
+            lambda e: self.controller.show_screen("results")
+        )
+
+        #Dashboard Navigation Item
+
+        self.dashboard_nav = tk.Frame(
+            self.footer_frame,
+            bg="white"
+        )
+
+        self.dashboard_nav.pack(
+            side="left",
+            expand=True,
+            pady=10
+        )
+
+        #Dashboard icon placeholder
+        self.dashboard_icon = tk.Label(
+            self.dashboard_nav,
+            text="📊",
+            bg="white",
+            font=("Arial", 20)
+        )
+
+        #Positioning it
+        self.dashboard_icon.pack()
+
+        # Dashboard text
+        self.dashboard_text = tk.Label(
+            self.dashboard_nav,
+            text="Dashboard",
+            bg="white",
+            fg="black",
+            font=("Poppins", 10)
+        )
+
+        #Positioning it
+        self.dashboard_text.pack()
+
+        # Bind click events to Dashboard navigation
+        self.dashboard_nav.bind(
+            "<Button-1>",
+            lambda e: self.controller.show_screen("dashboard")
+        )
+
+        self.dashboard_icon.bind(
+            "<Button-1>",
+            lambda e: self.controller.show_screen("dashboard")
+        )
+
+        self.dashboard_text.bind(
+            "<Button-1>",
+            lambda e: self.controller.show_screen("dashboard")
+        )
+
+    #-------------    
+    #Submit Method
+
+    def submit(self):
+
+        #Get user input
+        resource = self.resource_entry.get().strip()
+        category = self.category_var.get()
+        location = self.location_var.get()
+
+        #Validate resource input
+        if not resource:
+
+            msgbox.showwarning(
+                "Input Error",
+                "Please enter a resource name"
+            )
+
+            return
+
+        #Send data to controller 
+        self.controller.set_resource_input(
+            resource,
+            category,
+            location
+        )
+
+        #Navigate to results screen
+        self.controller.show_screen("results")
 
 
 
