@@ -1,7 +1,3 @@
-"""
-Dashboard Screen - Professional Table View
-Developer: Tochi
-"""
 
 import tkinter as tk
 from tkinter import ttk
@@ -22,17 +18,13 @@ class DashboardScreen:
 
         self.build_ui()
 
-    # =====================================================
-    # BUILD UI
-    # =====================================================
+    # The build_Ui method
 
     def build_ui(self):
 
         self.frame.pack(fill="both", expand=True)
 
-        # =================================================
-        # HEADER
-        # =================================================
+      # Header frame
 
         header_frame = tk.Frame(
             self.frame,
@@ -53,9 +45,7 @@ class DashboardScreen:
 
         header_label.pack(side="left", padx=18)
 
-        # =================================================
-        # MAIN CARD
-        # =================================================
+        #Main card
 
         main_card = tk.Frame(
             self.frame,
@@ -71,9 +61,7 @@ class DashboardScreen:
             pady=10
         )
 
-        # =================================================
-        # TOP SECTION
-        # =================================================
+       # This section is for the top frame
 
         top_frame = tk.Frame(
             main_card,
@@ -154,9 +142,7 @@ class DashboardScreen:
 
         self.search_entry.insert(0, "Search history...")
 
-        # =================================================
-        # TABLE SECTION
-        # =================================================
+       #The section for history table
 
         table_frame = tk.Frame(
             main_card,
@@ -231,9 +217,7 @@ class DashboardScreen:
 
         self.tree.pack(fill="both", expand=True)
 
-        # =================================================
-        # STATS SECTION
-        # =================================================
+        #This is the frame for statistics
 
         stats_frame = tk.Frame(
             main_card,
@@ -292,9 +276,7 @@ class DashboardScreen:
 
             stat_text.pack()
 
-        # =================================================
-        # FOOTER NAVIGATION
-        # =================================================
+        # the section for footer navigation
 
         nav_frame = tk.Frame(
             self.frame,
@@ -351,9 +333,7 @@ class DashboardScreen:
                 ipady=2
             )
 
-    # =====================================================
-    # SHOW
-    # =====================================================
+# Show method to ensure smooth switching of screens
 
     def show(self):
 
@@ -364,17 +344,13 @@ class DashboardScreen:
 
         self.load_history()
 
-    # =====================================================
-    # HIDE
-    # =====================================================
+    #The hide method
 
     def hide(self):
 
         self.frame.pack_forget()
 
-    # =====================================================
-    # LOAD HISTORY
-    # =====================================================
+  # Load History
 
     def load_history(self):
 

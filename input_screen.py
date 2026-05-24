@@ -1,8 +1,3 @@
-"""
-Input Screen - Resource entry
-Developer: Kennedy (Input Systems Engineer)
-With Enhanced Image Recognition (Color, Texture, Shape Analysis)
-"""
 
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
@@ -27,9 +22,7 @@ class InputScreen:
 
         self.build_ui()
 
-    # ==========================================
-    # ENHANCED IMAGE IDENTIFICATION
-    # ==========================================
+   # Image Identufucation method
 
     def identify_resource_enhanced(self, image_path):
         """
@@ -195,17 +188,13 @@ class InputScreen:
         
         return scores
 
-    # ==========================================
-    # BUILD UI
-    # ==========================================
+   # Build_ui house
 
     def build_ui(self):
 
         self.frame.pack(fill="both", expand=True)
 
-        # ==========================================
-        # HEADER
-        # ==========================================
+      #Header frame
 
         header_frame = tk.Frame(
             self.frame,
@@ -226,9 +215,7 @@ class InputScreen:
 
         header_label.pack(side="left", padx=15, pady=8)
 
-        # ==========================================
-        # TITLE SECTION
-        # ==========================================
+       #Title frame
 
         title_label = tk.Label(
             self.frame,
@@ -250,9 +237,7 @@ class InputScreen:
 
         subtitle_label.pack(pady=(0, 10))
 
-        # ==========================================
-        # MAIN WHITE CONTAINER
-        # ==========================================
+        # Main white container Frame
 
         white_frame = tk.Frame(
             self.frame,
@@ -268,9 +253,7 @@ class InputScreen:
             pady=(0, 8)
         )
 
-        # ==========================================
-        # INNER CONTENT FRAME
-        # ==========================================
+        # Inner content frame
 
         inner_frame = tk.Frame(
             white_frame,
@@ -284,9 +267,7 @@ class InputScreen:
             pady=14
         )
 
-        # ==========================================
-        # INPUT METHOD TITLE
-        # ==========================================
+        # Input method title
 
         method_label = tk.Label(
             inner_frame,
@@ -298,9 +279,7 @@ class InputScreen:
 
         method_label.pack(anchor="w", pady=(0, 8))
 
-        # ==========================================
-        # CARDS CONTAINER
-        # ==========================================
+        #Card container
 
         cards_frame = tk.Frame(
             inner_frame,
@@ -312,9 +291,7 @@ class InputScreen:
         cards_frame.grid_columnconfigure(0, weight=1)
         cards_frame.grid_columnconfigure(1, weight=1)
 
-        # ==========================================
-        # CAMERA CARD
-        # ==========================================
+        # The camera card section
 
         self.camera_card = tk.Frame(
             cards_frame,
@@ -369,9 +346,7 @@ class InputScreen:
         camera_subtitle.pack()
         camera_subtitle.bind("<Button-1>", self.open_camera)
 
-        # ==========================================
-        # UPLOAD CARD
-        # ==========================================
+       # Section for upload card
 
         self.upload_card = tk.Frame(
             cards_frame,
@@ -426,9 +401,7 @@ class InputScreen:
         upload_subtitle.pack()
         upload_subtitle.bind("<Button-1>", self.upload_image)
 
-        # ==========================================
-        # PREVIEW LABEL
-        # ==========================================
+        #The preview label
 
         self.preview_label = tk.Label(
             inner_frame,
@@ -439,9 +412,7 @@ class InputScreen:
         )
         self.preview_label.pack(pady=(0, 5))
 
-        # ==========================================
-        # DIVIDER
-        # ==========================================
+      #Divider
 
         divider = tk.Frame(
             inner_frame,
@@ -451,9 +422,7 @@ class InputScreen:
 
         divider.pack(fill="x", pady=8)
 
-        # ==========================================
-        # DETAILS LABEL
-        # ==========================================
+       # Details label
 
         details_label = tk.Label(
             inner_frame,
@@ -465,9 +434,7 @@ class InputScreen:
 
         details_label.pack(anchor="w", pady=(0, 8))
 
-        # ==========================================
-        # RESOURCE ENTRY
-        # ==========================================
+       #Resource Entry
 
         self.resource_entry = tk.Entry(
             inner_frame,
@@ -492,9 +459,7 @@ class InputScreen:
         self.resource_entry.bind("<FocusIn>", self.clear_placeholder)
         self.resource_entry.bind("<FocusOut>", self.restore_placeholder)
 
-        # ==========================================
-        # DROPDOWN CONTAINER
-        # ==========================================
+       #The dropdown container
 
         dropdown_container = tk.Frame(
             inner_frame,
@@ -503,9 +468,7 @@ class InputScreen:
 
         dropdown_container.pack(fill="x", pady=(0, 10))
 
-        # ==========================================
-        # LABELS FRAME
-        # ==========================================
+       #Labels frame
 
         labels_frame = tk.Frame(
             dropdown_container,
@@ -534,9 +497,7 @@ class InputScreen:
 
         location_label.pack(anchor="w")
 
-        # ==========================================
-        # DROPDOWNS FRAME
-        # ==========================================
+        #The second dropdown frame
 
         dropdowns_frame = tk.Frame(
             dropdown_container,
@@ -583,9 +544,7 @@ class InputScreen:
 
         self.location_dropdown.pack(ipady=2)
 
-        # ==========================================
-        # ANALYZE BUTTON
-        # ==========================================
+        #Analyze button
 
         analyze_btn = tk.Button(
             inner_frame,
@@ -607,9 +566,7 @@ class InputScreen:
             ipady=11
         )
 
-        # ==========================================
-        # BOTTOM NAVIGATION
-        # ==========================================
+      # Navigation bar
 
         nav_frame = tk.Frame(
             self.frame,
@@ -649,9 +606,7 @@ class InputScreen:
             )
             btn.pack(side="left", padx=45, pady=5)
 
-    # ==========================================
-    # CAMERA FUNCTIONALITY
-    # ==========================================
+    # Integration camera fucntionality
 
     def open_camera(self, event=None):
         """Open webcam, capture image, and auto-identify"""
@@ -749,9 +704,7 @@ class InputScreen:
         
         camera_window.protocol("WM_DELETE_WINDOW", on_close)
 
-    # ==========================================
-    # UPLOAD FUNCTIONALITY
-    # ==========================================
+    # Integrating image uplad functionality
 
     def upload_image(self, event=None):
         """Upload image and auto-identify"""
@@ -788,9 +741,7 @@ class InputScreen:
                     fg="green"
                 )
 
-    # ==========================================
-    # PLACEHOLDER METHODS
-    # ==========================================
+  #Placeholder methods
 
     def clear_placeholder(self, event):
         if self.resource_entry.get() == "Enter Resource (e.g Cassava, Sand, Plastic Bottles, Palm Oil)":
@@ -802,9 +753,7 @@ class InputScreen:
             self.resource_entry.insert(0, "Enter Resource (e.g Cassava, Sand, Plastic Bottles, Palm Oil)")
             self.resource_entry.config(fg="#888888")
 
-    # ==========================================
-    # SUBMIT
-    # ==========================================
+   # Submit method
 
     def submit(self):
         resource = self.resource_entry.get().strip()
@@ -828,16 +777,12 @@ class InputScreen:
         self.controller.set_resource_input(resource, category, location)
         self.controller.show_screen("results")
 
-    # ==========================================
-    # SHOW SCREEN
-    # ==========================================
+ # Show method
 
     def show(self):
         self.frame.pack(fill="both", expand=True)
 
-    # ==========================================
-    # HIDE SCREEN
-    # ==========================================
+    # Hide method
 
     def hide(self):
         self.frame.pack_forget()
