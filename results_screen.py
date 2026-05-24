@@ -1,7 +1,3 @@
-"""
-Results Screen - Displays Resource Intelligence
-Developer: Udo (Output & Presentation Engineer)
-"""
 
 import tkinter as tk
 from tkinter import messagebox
@@ -24,17 +20,13 @@ class ResultsScreen:
 
         self.build_ui()
 
-    # =========================================================
-    # BUILD UI
-    # =========================================================
+   # Build_Ui method
 
     def build_ui(self):
 
         self.frame.pack(fill="both", expand=True)
 
-        # =====================================================
-        # HEADER
-        # =====================================================
+        # Header method
 
         header_frame = tk.Frame(
             self.frame,
@@ -55,9 +47,7 @@ class ResultsScreen:
 
         header_label.pack(side="left", padx=18)
 
-        # =====================================================
-        # MAIN CARD
-        # =====================================================
+     #Main card method
 
         self.main_card = tk.Frame(
             self.frame,
@@ -73,9 +63,7 @@ class ResultsScreen:
             pady=10
         )
 
-        # =====================================================
-        # TOP SECTION
-        # =====================================================
+      # Top section
 
         top_frame = tk.Frame(
             self.main_card,
@@ -88,9 +76,7 @@ class ResultsScreen:
             pady=(15, 10)
         )
 
-        # =====================================================
-        # RESOURCE IMAGE
-        # =====================================================
+         # Resource image
 
         image_frame = tk.Frame(
             top_frame,
@@ -116,10 +102,7 @@ class ResultsScreen:
         )
 
         self.resource_image.pack(expand=True)
-
-        # =====================================================
-        # RESOURCE DETAILS
-        # =====================================================
+        #Resource details
 
         details_frame = tk.Frame(
             top_frame,
@@ -152,9 +135,7 @@ class ResultsScreen:
 
         self.resource_label.pack(anchor="w")
 
-        # =====================================================
-        # INCOME CARD
-        # =====================================================
+        # Income card
 
         income_card = tk.Frame(
             top_frame,
@@ -199,9 +180,7 @@ class ResultsScreen:
 
         income_subtitle.pack(pady=(3, 0))
 
-        # =====================================================
-        # GRID SECTION
-        # =====================================================
+       
 
         grid_frame = tk.Frame(
             self.main_card,
@@ -470,24 +449,17 @@ class ResultsScreen:
             )
             btn.pack(side="left", padx=28, pady=4)
 
-    # =========================================================
-    # SHOW
-    # =========================================================
+   # The show method
 
     def show(self):
         self.frame.pack(fill="both", expand=True)
         self.refresh()
 
-    # =========================================================
-    # HIDE
-    # =========================================================
-
+    #The hide method
     def hide(self):
         self.frame.pack_forget()
 
-    # =========================================================
-    # REFRESH RESULTS
-    # =========================================================
+   # Refresh result
 
     def refresh(self):
         if self.controller.current_resource and self.controller.resource_engine:
@@ -541,9 +513,7 @@ class ResultsScreen:
             self.local_label.config(text="Then click ANALYZE RESOURCES")
             self.current_results = None
 
-    # =========================================================
-    # SAVE SEARCH
-    # =========================================================
+    #save search feature
 
     def save_search(self):
         print(f"DEBUG: current_results = {self.current_results}")

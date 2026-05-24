@@ -2,11 +2,6 @@ import csv
 
 
 class ResourceEngine:
-    """
-    Resource matching engine
-    Developer: Dilibe (Core Logic Engineer)
-    """
-
     def __init__(self, csv_file="resources.csv"):
         """
         Initialize engine and load CSV data.

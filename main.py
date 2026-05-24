@@ -9,6 +9,8 @@ from results_screen import ResultsScreen
 from dashboard_screen import DashboardScreen
 from resourceengine import ResourceEngine
 from DataManager import DataManager
+
+
 class BaseScreen:
     """
     Base class for all screens - enables polymorphism.
