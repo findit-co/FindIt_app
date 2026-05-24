@@ -1,4 +1,4 @@
-from tarfile import data_filter
+
 import tkinter as tk
 from tkinter import ttk, messagebox
 import csv
