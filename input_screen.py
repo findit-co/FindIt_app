@@ -1,4 +1,3 @@
-
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 import cv2
@@ -26,7 +25,7 @@ class InputScreen:
 
     def identify_resource_enhanced(self, image_path):
         """
-        Analyze image using color, texture, and shape detection
+        Enhanced image recognition with special focus on plastic bottles
         Returns: (resource_name, confidence, details)
         """
         
@@ -36,6 +35,12 @@ class InputScreen:
         
         # Extract all features
         features = self._extract_features(img)
+        
+        # SPECIAL DETECTION: Plastic Bottle (priority check)
+        is_plastic_bottle, bottle_confidence = self._detect_plastic_bottle(img, features)
+        
+        if is_plastic_bottle:
+            return "Plastic Bottle", bottle_confidence, ["Plastic", "Container", "Recyclable"]
         
         # Score each resource
         scores = self._calculate_resource_scores(features)
@@ -52,6 +57,71 @@ class InputScreen:
         alternatives = [f"{r}: {int(s*100)}%" for r, s in sorted_scores[1:3] if s > 0.2]
         
         return resource, confidence, alternatives
+    
+    def _detect_plastic_bottle(self, img, features):
+        """
+        Specialized detection for plastic bottles
+        Returns: (is_bottle, confidence_percentage)
+        """
+        h, w = img.shape[:2]
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        
+        # 1. Check for cylindrical shape (bottle body)
+        circles = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, 50,
+                                   param1=50, param2=30, minRadius=int(h*0.05), maxRadius=int(h*0.35))
+        has_cylindrical_shape = circles is not None
+        
+        # 2. Check for bottle cap (small circle at top)
+        top_region = gray[0:int(h*0.25), :]
+        cap_circles = cv2.HoughCircles(top_region, cv2.HOUGH_GRADIENT, 1, 20,
+                                        param1=40, param2=25, minRadius=5, maxRadius=int(w*0.12))
+        has_cap = cap_circles is not None
+        
+        # 3. Check for neck (narrowing at top)
+        mid_width = w
+        top_width = cv2.reduce(gray[0:int(h*0.15), :], 1, cv2.REDUCE_AVG)
+        has_neck = np.mean(top_width) < mid_width * 0.7
+        
+        # 4. Color detection (typical bottle colors)
+        r, g, b = features['color']
+        is_typical_bottle_color = (
+            (g > 80 and r < 150 and b < 150) or  # Green bottle
+            (b > 80 and r < 150 and g < 150) or   # Blue bottle
+            (r > 100 and r < 180 and g > 80 and b < 120) or  # Brown bottle
+            (r > 180 and g > 180 and b > 180)     # Clear/white bottle
+        )
+        
+        # 5. Texture (smooth surface)
+        is_smooth = features['is_smooth']
+        
+        # 6. Edge detection for label area
+        edges = cv2.Canny(gray, 50, 150)
+        middle_region = edges[int(h*0.3):int(h*0.7), :]
+        label_edge_density = np.sum(middle_region > 0) / middle_region.size if middle_region.size > 0 else 0
+        has_label_area = 0.05 < label_edge_density < 0.25
+        
+        # Calculate confidence score
+        confidence = 0
+        if has_cylindrical_shape:
+            confidence += 30
+        if has_cap:
+            confidence += 25
+        if has_neck:
+            confidence += 20
+        if is_typical_bottle_color:
+            confidence += 15
+        if is_smooth:
+            confidence += 5
+        if has_label_area:
+            confidence += 5
+        
+        # Determine if it's a plastic bottle
+        is_bottle = confidence > 50
+        
+        # Cap confidence at 95
+        final_confidence = min(95, confidence)
+        
+        return is_bottle, final_confidence
     
     def _extract_features(self, img):
         """Extract multiple features from image"""
