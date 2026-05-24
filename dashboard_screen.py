@@ -1,4 +1,3 @@
-
 import tkinter as tk
 from tkinter import ttk
 import csv
@@ -10,6 +9,7 @@ class DashboardScreen:
 
         self.parent = parent
         self.controller = controller
+        self.all_history = []  # Store all history for searching
 
         self.frame = tk.Frame(
             parent,
@@ -118,10 +118,10 @@ class DashboardScreen:
 
         search_icon = tk.Label(
             search_frame,
-            text="⌕",
+            text="🔍",
             bg="white",
             fg="#666666",
-            font=("Arial", 12)
+            font=("Arial", 10)
         )
 
         search_icon.pack(side="right", padx=(5, 6))
@@ -142,7 +142,12 @@ class DashboardScreen:
 
         self.search_entry.insert(0, "Search history...")
 
-       #The section for history table
+        # Bind search events
+        self.search_entry.bind("<FocusIn>", self._clear_search_placeholder)
+        self.search_entry.bind("<FocusOut>", self._restore_search_placeholder)
+        self.search_entry.bind("<KeyRelease>", self._search_history)
+
+        #The section for history table
 
         table_frame = tk.Frame(
             main_card,
@@ -155,6 +160,10 @@ class DashboardScreen:
             padx=16,
             pady=(0, 12)
         )
+
+        # Add scrollbar
+        scrollbar = ttk.Scrollbar(table_frame, orient="vertical")
+        scrollbar.pack(side="right", fill="y")
 
         columns = (
             "#",
@@ -196,8 +205,11 @@ class DashboardScreen:
             table_frame,
             columns=columns,
             show="headings",
-            height=6
+            height=6,
+            yscrollcommand=scrollbar.set
         )
+
+        scrollbar.config(command=self.tree.yview)
 
         # HEADINGS
         self.tree.heading("#", text="#")
@@ -215,7 +227,7 @@ class DashboardScreen:
         self.tree.column("Date & Time", width=170)
         self.tree.column("Action", width=70, anchor="center")
 
-        self.tree.pack(fill="both", expand=True)
+        self.tree.pack(fill="both", expand=True, side="left")
 
         #This is the frame for statistics
 
@@ -230,51 +242,41 @@ class DashboardScreen:
             pady=(0, 12)
         )
 
-        stats = [
-            ("12", "Total Searches"),
-            ("8", "Resources Identified"),
-            ("4", "This Week"),
-            ("5", "Categories")
-        ]
+        self.total_label = tk.Label(
+            stats_frame,
+            text="0",
+            bg="#F6EEDC",
+            fg="#2B0A05",
+            font=("Poppins", 16, "bold")
+        )
 
-        for number, text in stats:
+        self.total_label.pack(side="left", padx=20)
 
-            stat_card = tk.Frame(
-                stats_frame,
-                bg="#F6EEDC",
-                bd=1,
-                relief="solid",
-                width=95,
-                height=72
-            )
+        total_text = tk.Label(
+            stats_frame,
+            text="Total Searches",
+            bg="#F8F1DD",
+            fg="#555555",
+            font=("Poppins", 10)
+        )
 
-            stat_card.pack(
-                side="left",
-                expand=True,
-                padx=5
-            )
+        total_text.pack(side="left")
 
-            stat_card.pack_propagate(False)
+        # Refresh button
+        refresh_btn = tk.Button(
+            stats_frame,
+            text="🔄 REFRESH",
+            bg="#6B0F0F",
+            fg="white",
+            relief="flat",
+            font=("Poppins", 9, "bold"),
+            cursor="hand2",
+            padx=15,
+            pady=5,
+            command=self.load_history
+        )
 
-            stat_number = tk.Label(
-                stat_card,
-                text=number,
-                bg="#F6EEDC",
-                fg="#2B0A05",
-                font=("Poppins", 16, "bold")
-            )
-
-            stat_number.pack(pady=(10, 0))
-
-            stat_text = tk.Label(
-                stat_card,
-                text=text,
-                bg="#F6EEDC",
-                fg="#555555",
-                font=("Poppins", 8)
-            )
-
-            stat_text.pack()
+        refresh_btn.pack(side="right")
 
         # the section for footer navigation
 
@@ -333,6 +335,50 @@ class DashboardScreen:
                 ipady=2
             )
 
+    # Search placeholder methods
+    def _clear_search_placeholder(self, event):
+        if self.search_entry.get() == "Search history...":
+            self.search_entry.delete(0, tk.END)
+
+    def _restore_search_placeholder(self, event):
+        if self.search_entry.get().strip() == "":
+            self.search_entry.insert(0, "Search history...")
+
+    def _search_history(self, event):
+        """Filter history based on search query"""
+        query = self.search_entry.get().strip().lower()
+        
+        if query == "" or query == "search history...":
+            self._display_history(self.all_history)
+        else:
+            filtered = [
+                item for item in self.all_history 
+                if query in item["resource"].lower() 
+                or query in item["location"].lower()
+                or query in item["category"].lower()
+            ]
+            self._display_history(filtered)
+
+    def _display_history(self, history_list):
+        """Display history items in the table"""
+        # Clear existing table
+        for item in self.tree.get_children():
+            self.tree.delete(item)
+
+        for i, item in enumerate(history_list, start=1):
+            self.tree.insert(
+                "",
+                "end",
+                values=(
+                    i,
+                    item["resource"],
+                    item["category"],
+                    item["location"],
+                    item["date"],
+                    "🗑"
+                )
+            )
+
 # Show method to ensure smooth switching of screens
 
     def show(self):
@@ -356,59 +402,86 @@ class DashboardScreen:
 
         # CLEAR EXISTING TABLE
         for item in self.tree.get_children():
-
             self.tree.delete(item)
+
+        self.all_history = []
 
         categories = {
             "cassava": "Agricultural",
             "palm oil": "Agricultural",
             "sand": "Mineral",
-            "plastic bottles": "Waste",
-            "bambara nut": "Agricultural"
+            "plastic": "Waste/Recycling",
+            "plastic bottle": "Waste/Recycling",
+            "bambara nut": "Agricultural",
+            "coconut": "Agricultural",
+            "maize": "Agricultural",
+            "timber": "Timber/Wood",
+            "scrap metal": "Scrap/Metal",
+            "charcoal": "Fuel/Energy",
+            "groundnut": "Agricultural",
+            "vegetables": "Agricultural",
+            "carpet grass": "Agricultural/Landscaping"
         }
 
         count = 0
 
         try:
-
-            with open(
-                "search_history.csv",
-                "r",
-                encoding="utf-8"
-            ) as file:
-
+            with open("search_history.csv", "r", encoding="utf-8") as file:
                 reader = csv.reader(file)
-
-                next(reader)
+                next(reader)  # Skip header
 
                 for i, row in enumerate(reader, start=1):
-
                     if len(row) >= 5:
-
                         resource = row[1].lower()
-
-                        category = categories.get(
-                            resource,
-                            "General"
-                        )
-
+                        
+                        # Find category
+                        category = "General"
+                        for key, cat in categories.items():
+                            if key in resource:
+                                category = cat
+                                break
+                        
+                        history_item = {
+                            "resource": row[1].title(),
+                            "category": category,
+                            "location": row[2],
+                            "date": row[0]
+                        }
+                        
+                        self.all_history.append(history_item)
+                        
                         self.tree.insert(
                             "",
                             "end",
                             values=(
                                 i,
-                                row[1].title(),
-                                category,
-                                row[2],
-                                row[0],
+                                history_item["resource"],
+                                history_item["category"],
+                                history_item["location"],
+                                history_item["date"],
                                 "🗑"
                             )
                         )
-
                         count += 1
 
-        except FileNotFoundError:
+            # Update total label
+            self.total_label.config(text=str(count))
 
+            if count == 0:
+                self.tree.insert(
+                    "",
+                    "end",
+                    values=(
+                        "-",
+                        "No search history",
+                        "-",
+                        "-",
+                        "-",
+                        "-"
+                    )
+                )
+
+        except FileNotFoundError:
             self.tree.insert(
                 "",
                 "end",
@@ -421,3 +494,4 @@ class DashboardScreen:
                     "-"
                 )
             )
+            self.total_label.config(text="0")
